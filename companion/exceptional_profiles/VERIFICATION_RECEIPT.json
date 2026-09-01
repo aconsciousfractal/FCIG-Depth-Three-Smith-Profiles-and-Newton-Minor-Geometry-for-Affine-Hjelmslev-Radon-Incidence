@@ -1,0 +1,50 @@
+{
+  "artifacts": {
+    "depth3_smith.py": {
+      "bytes": 16094,
+      "sha256": "C1761F3AD2431291FF877BFF999A331756EE865780D35AEFF24CA3DAC3B3AC9E"
+    },
+    "EXPECTED.json": {
+      "bytes": 1089,
+      "sha256": "AFC4672E53FFD0FD520E776A9BF3DF202F6FF5A1F692658DBAC563E8422F195C"
+    },
+    "INPUT.json": {
+      "bytes": 368,
+      "sha256": "54F0D8A1360B151A80A58C80BB519755FB87590C82BF43557A05BC7ADB8745E7"
+    },
+    "RESULT.json": {
+      "bytes": 1220,
+      "sha256": "048EA482B09B24428FDA63E297F0F69D7B275C5AA27A0937BF469E6A928A0D50"
+    },
+    "verify_exceptional_profiles.py": {
+      "bytes": 3828,
+      "sha256": "9B4ED536A73728A417B8AB990EADD837A975C129F18BCA104B0FD2715C2968E9"
+    }
+  },
+  "cases": {
+    "p2": [30, 6, 19, 6, 2, 1],
+    "p3": [240, 168, 195, 108, 15, 3]
+  },
+  "claim_boundary": "bounded exact certificates for p=2,3 only; no all-prime inference",
+  "environment": {
+    "numpy": "2.5.1",
+    "python": "3.14.6"
+  },
+  "executions": {
+    "normal": {
+      "result_sha256": "048EA482B09B24428FDA63E297F0F69D7B275C5AA27A0937BF469E6A928A0D50",
+      "status": "PASS"
+    },
+    "optimized": {
+      "result_sha256": "048EA482B09B24428FDA63E297F0F69D7B275C5AA27A0937BF469E6A928A0D50",
+      "status": "PASS"
+    }
+  },
+  "generated_on": "2026-09-01",
+  "lanes": [
+    "minimum-valuation local Smith elimination",
+    "Bockstein layer peeling"
+  ],
+  "schema": "fcig.depth3.exceptional-receipt.v1",
+  "status": "PASS"
+}

@@ -1,0 +1,6 @@
+# Direct dependencies. Reproducible installs and CI use requirements.lock
+# with --require-hashes; this short file documents the public API surface.
+sympy==1.14.0
+numpy==2.5.1
+pytest==9.1.1
+pypdf==6.14.2

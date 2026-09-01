@@ -1,0 +1,35 @@
+{
+  "cases": {
+    "2": {
+      "bockstein_transcript_sha256": "55BB7A4716CAF11B4854B0820EF7F76D6414458B1A96ACBEC5363649F3B5E4AD",
+      "matrix_sha256": "CAD9CC122B4811426CE958D1EA9487C536BF51FEACD3550FA04A94A012EB5E82",
+      "minpivot_transcript_sha256": "A885D716FE257236BE578CE46C4D55386D206DAD27395F78F30A363FFCABCCF6",
+      "profile": {
+        "0": 30,
+        "1": 6,
+        "2": 19,
+        "3": 6,
+        "4": 2,
+        "5": 1
+      },
+      "shape": [64, 96],
+      "weighted_order_exponent": 75
+    },
+    "3": {
+      "bockstein_transcript_sha256": "01044374BA0CBBC15C2044D8C790852270DB6CC9563B3400488A42F995318435",
+      "matrix_sha256": "3D05CC493F837A76693934970005F025F3CC37C70DCECDD659295A37BC23CC68",
+      "minpivot_transcript_sha256": "BA218A884D1AA7BD86BAC61C3978081D4CEDED602E84097A13A4F994D2F5001D",
+      "profile": {
+        "0": 240,
+        "1": 168,
+        "2": 195,
+        "3": 108,
+        "4": 15,
+        "5": 3
+      },
+      "shape": [729, 972],
+      "weighted_order_exponent": 957
+    }
+  },
+  "schema": "fcig.depth3.exceptional-expected.v1"
+}

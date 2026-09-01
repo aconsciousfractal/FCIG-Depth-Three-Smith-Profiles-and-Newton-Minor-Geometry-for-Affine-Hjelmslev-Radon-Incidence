@@ -1,0 +1,2381 @@
+\documentclass[12pt,a4paper]{article}
+\pdfvariable trailerid {[
+  <D3A301092026D3A301092026D3A30109>
+  <D3A301092026D3A301092026D3A30109>
+]}
+\pdfextension catalog {/Lang (en-US)}
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{microtype}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\Urlmuskip=0mu plus 2mu\relax
+\urlstyle{tt}
+\hypersetup{
+  pdftitle={Depth-Three Smith Profiles and Newton-Minor Geometry for Affine Hjelmslev-Radon Incidence},
+  pdfauthor={Oleksiy Babanskyy},
+  pdfsubject={Integral Smith theory of depth-three affine Hjelmslev-Radon incidence},
+  pdfkeywords={Smith normal form, Hjelmslev geometry, Radon transform, q-Pascal matrix, Newton minors}
+}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{csquotes}
+\usepackage[backend=biber,style=numeric-comp,sorting=nyt,maxbibnames=12,giveninits=true]{biblatex}
+\addbibresource{references.bib}
+\setcounter{biburlnumpenalty}{9000}
+\setcounter{biburlucpenalty}{9000}
+\setcounter{biburllcpenalty}{9000}
+\AtBeginBibliography{\small\raggedright
+  \setlength{\emergencystretch}{3em}%
+  \setlength{\bibitemsep}{0.15\baselineskip}%
+  \hbadness=10000}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\F}{\mathbb F}
+\newcommand{\R}{\mathsf R}
+\newcommand{\A}{\mathsf A}
+\newcommand{\OO}{\mathcal O}
+\newcommand{\LL}{\mathsf L}
+\newcommand{\QQ}{\mathsf Q}
+\newcommand{\Rel}{\operatorname{Rel}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\length}{\operatorname{length}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Fib}{\operatorname{Fib}}
+\newcommand{\ngen}{\operatorname{ngen}}
+\newcommand{\Hilb}{\operatorname{Hilb}}
+\newcommand{\vp}{v_p}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\transpose}{\mathsf T}
+\newcommand{\pos}[1]{\left[#1\right]_{+}}
+\input{generated/formulas.tex}
+
+\crefname{theorem}{theorem}{theorems}
+\crefname{lemma}{lemma}{lemmas}
+\crefname{proposition}{proposition}{propositions}
+\crefname{corollary}{corollary}{corollaries}
+\crefname{definition}{definition}{definitions}
+
+\title{Depth-Three Smith Profiles and Newton-Minor Geometry for Affine
+  Hjelmslev--Radon Incidence}
+\author{Oleksiy Babanskyy}
+\date{}
+\pagestyle{plain}
+
+\begin{document}
+\raggedbottom
+\maketitle
+
+\begin{abstract}
+Let $B_3$ be the integer line-by-point incidence matrix of the affine plane
+over $\Z/p^3\Z$, with primitive normal directions taken modulo units.  We
+determine every nonzero Smith factor for every prime.  The exponent is
+$p^5$, and the six multiplicities $m_0,\ldots,m_5$ are given by explicit
+polynomials on the two residue classes $p\equiv1,5\pmod6$, together with
+separate exact rows for $p=2,3$.  The new ingredient is a reduction of the
+first unresolved integral obstruction to a truncated $q$-Pascal common
+image.  An exact $q$-Lucas block product identifies its supported columns;
+a scalar recurrence proves module closure and boundary generation; and a
+$q$-Newton row basis makes all determinantal ideals triangular with Smith
+thresholds
+\[
+ \tau_p(K)=\mu_p\bigl(p^2(p-1)-K\bigr)+p\beta_p(K).
+\]
+This also yields the complete ambient filtered profile, Hilbert series and
+minimal number of generators of the common image.  A typed cross-chart
+exchange closes the remaining transfer defect.  Finite computations are
+used only for exceptional certificates and regression, not to interpolate
+the all-prime formulas.
+\end{abstract}
+
+\smallskip
+\noindent\textbf{Keywords:} Smith normal form; affine Hjelmslev geometry;
+Radon transform; incidence matrix; residue ring; $q$-Pascal matrix; Newton
+minors.
+
+\smallskip
+\noindent\textbf{MSC 2020:} 05B20 (primary); 15B36, 51E15, 13H10
+(secondary).
+
+\begin{center}
+\small
+\href{https://github.com/aconsciousfractal/FCIG-Depth-Three-Smith-Profiles-and-Newton-Minor-Geometry-for-Affine-Hjelmslev-Radon-Incidence}{Companion repository and reproducibility materials}
+\end{center}
+
+\smallskip
+\noindent\textcopyright\ 2026 Oleksiy Babanskyy.  The manuscript source
+and compiled paper retain the author's copyright.  The accompanying original
+software and repository documentation are released under the MIT License;
+see \texttt{LICENSE\_SCOPE.md}.  No novelty, firstness, priority, or
+exhaustive-literature claim is made.
+
+\section{Contribution and logical spine}
+\label{sec:contribution}
+
+The incidence object in this paper is affine and integral.  It is neither a
+projective incidence matrix nor a matrix over a field having the same
+cardinality as $\Z/p^3\Z$.  The main result, \cref{thm:main-profile}, gives
+the complete Smith profile at depth three for every prime.  Its proof is
+not a finite-prime fit.  It combines four uniform layers:
+
+\begin{enumerate}
+\item a maximal-order and point-fibre transfer analysis, which fixes the
+  total determinant order and high Smith tail;
+\item a complete-ideal calculation of the modular rank;
+\item an odd-prime tripotent-sector reduction to a truncated $q$-Pascal
+  common image, followed by an exact Newton-minors calculation of that
+  image;
+\item a cross-chart divided-carry theorem, which removes the final transfer
+  defect before the exact Smith bookkeeping is applied.
+\end{enumerate}
+
+The written proof and the finite calculations play distinct roles.
+The exceptional primes $2$ and $3$ have exact finite certificates where a
+semisimple or degree-bound argument does not apply.  The primes $5$, $7$,
+and $11$ are retained as public exact regression rows evaluated from the
+tracked formulas.  They do not enter the selection of either residue-class
+branch, and none of these finite rows proves a uniform polynomial.
+
+The diagonal cyclic valuation formulas used in the top-shell calculation
+belong to Weber--K\"unzer \cite{WK04}; the cyclic CRT layer is also covered
+by Mahatab--Sampath \cite{MS15}.  The complete-ideal correspondence and
+Hoskin--Deligne length formula are imported through Lipman's work
+\cite{LIP93,LW03}.  Sagan supplies $q$-Lucas \cite{SAG92}, while the
+integral $q$-Stirling expansion is the Carlitz identity in the form recorded
+by Cai--Ehrenborg--Readdy \cite{CER18}.  These sources do not state the
+affine common-image theorem, the Newton-minors theorem, or the profile in
+\cref{thm:main-profile}.
+
+Sections~\ref{sec:object}--\ref{sec:modrank} fix the structural invariants.
+Sections~\ref{sec:sector}--\ref{sec:filtered} compute the first integral
+obstruction.  Section~\ref{sec:o2} closes the cross-chart transfer defect,
+  and Sections~\ref{sec:assembly}--\ref{sec:controls} assemble and check the
+answer.  Section~\ref{sec:repro} defines the public reproducibility and
+repository boundary.
+
+\section{Affine incidence lattice, maximal order,
+\texorpdfstring{\protect\\}{ }and transfer}
+\label{sec:object}
+
+\begin{definition}[Affine Hjelmslev--Radon incidence]
+\label[definition]{def:incidence}
+Fix a prime $p$ and $n\geq1$, and put
+\[
+ \R_n=\Z/p^n\Z,\qquad G_n=\R_n^2.
+\]
+A vector $u=(a,b)$ is primitive if $a\R_n+b\R_n=\R_n$.  Primitive vectors
+are identified under multiplication by $\R_n^\times$, and we use the chart
+\[
+ \mathbb P^1(\R_n)=
+ \{(1,t):t\in\R_n\}\sqcup
+ \{(ps,1):s\in\Z/p^{n-1}\Z\}.
+\]
+For $u\in\mathbb P^1(\R_n)$ and $c\in\R_n$, let
+$\ell_{u,c}=\{x\in G_n:u\cdot x=c\}$.  The matrix $B_n$ has rows
+$(u,c)$, columns $x\in G_n$, and entries
+\[
+ B_n[(u,c),x]=\mathbf 1_{\{u\cdot x=c\}}.
+\]
+Thus $B_n$ has $(p+1)p^{2n-1}$ rows, $p^{2n}$ columns, and each row has
+$p^n$ ones.
+\end{definition}
+
+Let $\A_n=\Z[G_n]$.  For $H_u=\ker(u)$ put
+$N_{H_u}=\sum_{h\in H_u}[h]$ and
+\[
+ \LL_n=\sum_u\A_nN_{H_u},\qquad \QQ_n=\A_n/\LL_n.
+\]
+
+\begin{lemma}[Group-ring dictionary]
+\label[lemma]{lem:dictionary}
+There is a canonical isomorphism
+\[
+ \QQ_n\cong\coker(B_n^{\transpose}).
+\]
+In particular, $\QQ_n$ records the $p^{2n}$ nonzero Smith factors of
+$B_n$.
+\end{lemma}
+
+\begin{proof}
+For fixed $u$, the $p^n$ affine fibres are disjoint translates of $H_u$;
+their indicators form a $\Z$-basis of $\A_nN_{H_u}$.  Summing over the
+direction chart identifies the image of $B_n^{\transpose}$ with $\LL_n$.
+\end{proof}
+
+The rational characters of exact order $p^k$ form Galois orbits indexed by
+cyclic subgroups of order $p^k$.  These subgroups form a rooted projective
+character tree; level $k$ has $(p+1)p^{k-1}$ nodes, each carrying
+$\Z[\zeta_{p^k}]$.
+
+\begin{theorem}[Maximal-order quotient]
+\label[theorem]{thm:maximal-order}
+Let $\OO_n$ be the maximal order in $\Q[G_n]$.  Then
+\begin{align}
+ \OO_n/\LL_n
+ &\cong \Z/p^{2n}\Z\oplus
+ \bigoplus_{k=1}^{n}
+ (\Z/p^{2n-k}\Z)^{p^{2k}-p^{2k-2}},\tag{2.1}\label{eq:O-L}\\
+ \vp|\QQ_n|
+ &=\frac{np^{2n}}2-
+   \frac{p(p^{2n}-1)}{2(p^2-1)}.\tag{2.2}\label{eq:Q-order}
+\end{align}
+In particular,
+\[
+ \vp|\QQ_3|=\frac{3p^6-p^5-p^3-p}{2}.
+\]
+\end{theorem}
+
+\begin{proof}
+For a leaf $C$ in the character tree let $\mathsf R_C$ be the image of the
+cyclic group ring on the root-to-leaf components and put
+$\mathsf M_n=\sum_C\mathsf R_C$.  Fourier evaluation of a line norm gives
+the exact additive identity $\LL_n=p^n\mathsf M_n$.  Projection to the top
+cyclotomic level is onto.  On each branch its kernel is generated by
+$\Phi_{p^n}(t)$, whose value on every lower $p$-power root is $p$.
+Top components are leaf-disjoint, hence
+\[
+ \mathsf M_n\cap\OO_{<n}=p\mathsf M_{n-1}.
+\]
+Induction gives exponent $n$ once at the root and exponent $n-k$ with
+multiplicity $p^{2k}-p^{2k-2}$ at level $k$ for
+$\mathsf M_n\subset\OO_n$.  Scaling by $p^n$ proves \eqref{eq:O-L}.
+Subtracting the standard group-ring normalization index from the exponent
+sum yields \eqref{eq:Q-order}.  The cyclic branch kernel is the prior-art
+CRT layer \cite{MS15}; the projective-tree assembly is the step used here.
+\end{proof}
+
+Let $\pi_n:G_n\to G_{n-1}$ be reduction and define point-fibre transfer
+\[
+ \tau_n([a])=\sum_{\pi_n(x)=a}[x].
+\]
+
+\begin{theorem}[Exact transfer and multiscale pencil]
+\label[theorem]{thm:transfer}
+For $n\geq2$,
+\[
+ \tau_n(\A_{n-1})\cap\LL_n=\tau_n(\LL_{n-1}),
+\]
+so $\tau_n$ induces an injection $\QQ_{n-1}\hookrightarrow\QQ_n$.
+Moreover, in $\QQ_n$,
+\[
+ p^n[x]=\tau_n\bigl(p^{n-2}[x\bmod p^{n-1}]\bigr),
+ \qquad p^n\QQ_n=\tau_n(p^{n-2}\QQ_{n-1}).
+\tag{2.3}
+\]
+Consequently $\exp(\QQ_n)=p^{2n-1}$ and, if $m_h^{(n)}$ denotes the
+multiplicity of $\Z/p^h\Z$ in $\QQ_n$, then
+\[
+ m_{n+h}^{(n)}=m_{n-2+h}^{(n-1)}\qquad(1\leq h\leq n-1).
+\tag{2.4}
+\]
+\end{theorem}
+
+\begin{proof}
+In Fourier coordinates a point fibre has value $p^2$ on lower characters
+and zero on exact-order-$p^n$ characters.  Combining this with the
+leafwise description in \cref{thm:maximal-order} gives
+\[
+ \tau_n(a)\in\LL_n\Longleftrightarrow a\in\LL_{n-1},
+\]
+and disjoint point-fibre supports give injectivity.
+
+For the second assertion let $F_{r,n}(x)$ be the sum of points congruent to
+$x$ modulo $p^r$, and let $S_x$ be the sum of the unique line of every
+direction through $x$.  Coefficient counting by the valuation of $y-x$
+gives in $\A_n$
+\[
+ S_x=F_{0,n}+\sum_{r=1}^{n-1}(p^r-p^{r-1})F_{r,n}(x)+p^n[x].
+\]
+Both $S_x$ and $F_{0,n}$ vanish in $\QQ_n$.  Subtracting the transferred
+depth-$(n-1)$ identity leaves (2.3).  Injection and induction from the
+depth-one affine profile \cite{CSX06} give the exact exponent; comparing
+cyclic factors in (2.3) gives (2.4).
+\end{proof}
+
+At depth two write
+\[
+ \alpha=\frac{p^3(p-1)}2,\qquad
+ \beta=\frac{p(p-1)^2(p+2)}4,\qquad
+ \gamma=\frac{p(p-1)}2.
+\tag{2.5}
+\]
+The depth-two profile has multiplicities $\alpha,\beta,\gamma$ at
+exponents $1,2,3$ \cite{BAB26D2}.  Hence (2.1)--(2.4) imply for
+depth three
+\[
+ m_4=\beta,\qquad m_5=\gamma,
+\tag{2.6}
+\]
+and exclude exponents above five.
+
+\section{The modular rank and the cyclic top-shell count}
+\label{sec:modrank}
+
+We next determine $m_0=\rank_{\F_p}B_3$.  Let
+$\overline\A_3=\F_p[(\Z/p^3\Z)^2]$ and let $I_3$ be the span of all
+affine-line indicators.  In augmentation coordinates
+$\overline\A_3\cong k[x,y]/(x^{p^3},y^{p^3})$, put
+$J_3=\Ann(I_3)$.
+
+\begin{lemma}[Depth-three bundle annihilator]
+\label[lemma]{lem:bundle-annihilator}
+For each $e\in\mathbb P^1(\Z/p^2\Z)$ choose regular parameters
+$(z_e,v_e)$ along the associated direction.  Then
+\[
+ J_3=\bigcap_e(z_e,v_e^{p^2})^p.
+\tag{3.1}
+\]
+\end{lemma}
+
+\begin{proof}
+A primitive cyclic line subgroup $H=\langle h\rangle$ has norm
+$N_H=(h-1)^{p^3-1}$ in characteristic $p$, hence
+$\Ann(N_H)=(h-1)$.  Group the $p$ fine lifts above a depth-two direction
+as $h_{e,a}=g_et_e^{p^2a}$.  With $z=g_e-1$ and $w=v^{p^2}$, their linear
+factors are $(1+z)(1+w)^a-1$.  Modulo $(z,w)^p$, truncated logarithms send
+  them to the $p$ distinct forms $Z+aW$.  A polynomial of degree below $p$
+  divisible by all these forms is zero, so the intersection contains no
+  nonzero class of degree below $p$.  Conversely, modulo each monic factor
+  $(1+z)(1+w)^a-1$ one has $z\in(w)$; hence every monomial of total degree
+  $p$ maps into $(w^p)=0$.  Thus $(z,w)^p$ lies in every factor ideal, and
+  their intersection is exactly $(z,w)^p$.  Intersecting all bundles gives
+  (3.1).
+\end{proof}
+
+\begin{lemma}[Formal lift and simultaneous base-point cluster]
+\label[lemma]{lem:formal-cluster}
+Put $N=p^3$, $q=p^2$, let $R=k[[x,y]]$ with maximal ideal
+$\mathfrak m=(x,y)$, and choose formal lifts of the regular pairs in
+\cref{lem:bundle-annihilator}.  Set
+\[
+\widetilde I_e=(z_e,v_e^q)^p,
+\qquad
+\widetilde J_3=\bigcap_{e\in\mathbb P^1(\Z/p^2\Z)}\widetilde I_e.
+\]
+Then $\mathfrak m^N\subseteq\widetilde J_3$, the ideal
+$\widetilde J_3$ is complete, and reduction modulo $(x^N,y^N)$ identifies it
+with $J_3$.  A common point-blowup resolution has
+one root, $p+1$ trunks of length $p-1$, and $p$ branches above each trunk of
+length
+\[
+ L=q-p=p(p-1).
+\]
+In the strict exceptional basis its componentwise-maximum divisor has
+coefficients
+\[
+ p\quad\text{at the root},\qquad
+ p(j+1)\quad(1\leq j\leq p-1)\quad\text{on a trunk},
+\]
+and
+\[
+ p(p+r)\quad(1\leq r\leq L)\quad\text{on a branch}.
+\]
+Its least antinef majorant represents $\widetilde J_3$.  In particular,
+\[
+ \rank_k B_3=\dim_k I_3
+ =\dim_k(\overline\A_3/J_3)
+ =\length_R(R/\widetilde J_3).
+\]
+\end{lemma}
+
+\begin{proof}
+In any regular pair $(z,v)$, a monomial $z^av^b$ outside
+$(z,v^q)^p$ satisfies $a+\lfloor b/q\rfloor\leq p-1$, hence
+$a+b\leq pq-1=N-1$.  Therefore $\mathfrak m^N$ lies in every
+$\widetilde I_e$.  The same monomial description says
+\[
+ (z,v^q)^p=(z^av^b:a,b\geq0,\ qa+b\geq pq),
+\]
+whose exponent set is exactly the set of lattice points in its Newton
+polyhedron.  Hence each $\widetilde I_e$ is integrally closed, and their
+finite intersection is integrally closed as well: an element integral over
+the intersection is integral over every $\widetilde I_e$, and hence belongs
+to every $\widetilde I_e$.  Thus $\widetilde J_3$ is a complete
+$\mathfrak m$-primary ideal.  Since
+$(x^N,y^N)\subseteq\mathfrak m^N\subseteq\widetilde I_e$ for every $e$,
+finite intersection commutes with the Artinian quotient and
+\[
+ \widetilde J_3/(x^N,y^N)=J_3,
+ \qquad
+ \length_R(R/\widetilde J_3)=\dim_k(\overline\A_3/J_3).
+\]
+Let $\bar k$ be an algebraic closure of $k$.  Because all ideals contain
+$\mathfrak m^N$, the base change $R\to\bar k[[x,y]]$ may be computed in the
+finite quotient $R/\mathfrak m^N$.  Faithful flatness makes it commute with
+the finite intersection and gives
+\[
+ \dim_k(R/\widetilde J_3)
+ =\dim_{\bar k}\bigl(\bar k[[x,y]]/
+   \widetilde J_3\bar k[[x,y]]\bigr).
+\]
+We may therefore use the complete-ideal/antinef correspondence over
+$\bar k$ and descend its numerical colength to $k$.
+
+We now construct the common cluster.  In the finite-slope chart write a
+direction as $a=a_0+pa_1$, with $a_0,a_1\in k$, and take
+\[
+ z_a=(1+x)^{-a}(1+y)-1,\qquad v_a=x.
+\]
+For two lifts of the same coarse direction, Frobenius gives
+\[
+ 1+z_{a_0+pa_1}
+ =(1+z_{a_0+pb_1})(1+x^p)^{\,b_1-a_1}.
+\]
+If $a_1\ne b_1$, reduction modulo $z_{a_0+pb_1}$ has first nonzero term
+$(b_1-a_1)x^p$.  The two smooth branches therefore have intersection
+multiplicity exactly $p$.  After $j$ blowups along their common smooth
+branch, $0\leq j<p$, their difference has leading term a nonzero multiple of
+$x^{p-j}$; after the $p$th it records the distinct residue $a_1$.  They
+therefore share the root and $p-1$ successive free infinitely-near points,
+and then separate at the $p$ distinct values of $a_1$.  Directions with
+different $a_0$ have distinct linear tangents $y-a_0x$ and separate after
+the first blowup.  Interchanging $x$ and $y$ treats the remaining chart
+$(pa_1,1)$.  Hence there are exactly $p+1$ coarse trunks, with $p$ branches
+over each trunk.  Every center lies on the strict transform of a smooth
+branch and only on the newest exceptional component, so no center is
+satellite.  The coarse tangents, the separation parameters $a_1$ and all
+subsequent centers are $k$-rational; hence every residue-degree factor in the
+Hoskin--Deligne sum is one.
+For $p=2$ the same construction has three trunks of length one and two
+branches of length two above each trunk; the coefficient $b_1-a_1$ remains
+nonzero, so no contact or separation step degenerates.
+
+For one direction, follow the smooth branch $z_e=0$.  At the $j$th center,
+successive substitutions $z_{e,j-1}=v_ez_{e,j}$ give the weak transforms
+\[
+ (z_{e,j},v_e^{q-j})^p,\qquad 0\leq j<q.
+\]
+Thus $\widetilde I_e$ has point-basis multiplicity $p$ at the root and at
+each of a free chain of $q-1$ further points.  Its first $p$ centers are the
+root and the common trunk; after separation the remaining $q-p=L$ centers
+form its branch.
+
+Let $\mu:X\to\operatorname{Spec}R$ be the common resolution and let $D_e$
+be the divisor of $\widetilde I_e$ on $X$.
+Along its own free chain, point-basis multiplicity $p$ makes the coefficient
+of the exceptional component created at depth $d$ in the strict exceptional
+basis equal to $p(d+1)$.
+An ideal whose branch has already separated has unit weak transform at a
+center on another branch, so further pullback only propagates its coefficient
+at the last common component; it cannot exceed the coefficient supplied by
+the ideal belonging to that branch.
+Taking $D^{\rm raw}=\max_eD_e$ componentwise therefore gives exactly the
+displayed root, trunk and branch coefficients.  A rational function is a
+local section of $\mathcal O(-D^{\rm raw})$ precisely when its exceptional
+valuations dominate every $D_e$; hence
+$\mathcal O(-D^{\rm raw})=\bigcap_e\mathcal O(-D_e)$ and
+\[
+ \mu_*\mathcal O(-D^{\rm raw})
+ =\bigcap_e\mu_*\mathcal O(-D_e)
+ =\bigcap_e\widetilde I_e=\widetilde J_3.
+\]
+Unloading replaces $D^{\rm raw}$ by its unique least antinef majorant
+without changing this pushforward
+\cite[Section~1]{LIP93}\cite[Corollary~1.1.2 and Lemma~1.2]{LW03}.
+Finally, affine translation preserves the line span, so $I_3$ is an ideal.
+The coefficient-of-identity pairing makes $\overline\A_3$ a symmetric
+Frobenius algebra; its nondegeneracy therefore gives
+$J_3=\Ann(I_3)=I_3^\perp$, and the final displayed equality follows.
+\end{proof}
+
+The preceding lemma supplies the raw divisor rather than assuming it.
+Symmetry and unloading now give the following least antinef point basis.
+
+\begin{theorem}[Depth-three modular rank]
+\label[theorem]{thm:modrank}
+Let $A$ be the root point-basis coefficient, $H$ the common point-basis
+coefficient at every trunk point and $K_1,\ldots,K_L$ the successive
+point-basis coefficients on each branch.  The least antinef majorant has
+point basis
+\[
+\begin{array}{c|c|c|c}
+\text{case}&A&H&(K_i)_{1\leq i\leq L}\\ \hline
+p=3&15&3&1,\ldots,1\\
+p=3h+1&(p+1)H+p&\dfrac{(p-1)(p+2)}3&h,\ldots,h\\[2mm]
+p=3h+2&(p+1)H&\dfrac{p(p+1)}3&
+ h+1\ (ph\text{ times}),\ h\ (L-ph\text{ times}).
+\end{array}
+\tag{3.2}
+\]
+The last line includes $p=2$.  Consequently
+\[
+ M_p:=\rank_{\F_p}B_3=
+ \begin{cases}
+ 240,&p=3,\\[1mm]
+ \FCIGDThreeModularRankOne,&p\equiv1\pmod3,\\[3mm]
+ \FCIGDThreeModularRankTwo,&p\equiv2\pmod3.
+ \end{cases}
+\tag{3.3}
+\]
+\end{theorem}
+
+\begin{proof}
+The least antinef majorant is unique.  The decorated tree is invariant under
+permutations of equal trunks and of the $p$ branches above each trunk, so the
+least majorant has a symmetric point basis.  Write $h$ for its common trunk
+coefficient at the first trunk point, and write $H_1,\ldots,H_{p-1}$ for
+the successive trunk coefficients, so $H_1=h$.  On each branch its
+point-basis coefficients satisfy
+\[
+ h=H_1\geq H_2\geq\cdots\geq H_{p-1}\geq pK_1,
+ \qquad
+ K_1\geq K_2\geq\cdots\geq K_L\geq0,
+\]
+while root proximity gives $A\geq(p+1)h$.  The corresponding strict
+exceptional coefficients are
+\[
+ A+\sum_{q=1}^{j}H_q\quad(1\leq j\leq p-1),\qquad
+ A+\sum_{q=1}^{p-1}H_q+\sum_{i=1}^{r}K_i
+ \quad(1\leq r\leq L).
+\]
+The last one must dominate the raw endpoint coefficient $p^3$.  Since
+$H_q\leq h$ and $K_i\leq\lfloor h/p\rfloor$, every symmetric antinef
+majorant therefore satisfies
+\[
+ A\geq\max\left((p+1)h,
+ p^3-(p-1)h-p(p-1)\left\lfloor\frac hp\right\rfloor\right).
+\tag{3.4}
+\]
+Put $F_p(h)$ equal to the right-hand side.  Writing $h=pk+s$,
+$0\leq s<p$, makes the second entry minus the first
+\[
+ p\bigl(p^2-(3p-1)k-2s\bigr).
+\]
+If $p=3m+1$, the unique minimum occurs at
+$k=m$, $s=2m$, namely $h=(p-1)(p+2)/3$: the difference is $p$ there and
+$-p$ at $h+1$, while the decreasing entry is larger by $p-1$ at $h-1$.
+Thus $F_p(h)=(p+1)h+p$.  If $p=3m+2$, the unique minimum is at
+$h=p(m+1)$; comparison with $h-1$ and $h+1$ gives $F_p(h)=(p+1)h$.
+For $p=3$, direct evaluation gives the unique minimum $F_3(3)=15$.
+
+It remains to show that the lower bounds are attained in the proximity
+partial-sum order.  In the
+$p=3m+1$ and $p=3$ cases, equality at the terminal raw coefficient forces
+all $H_q=h$ and every branch coefficient to be $m$ and $1$, respectively.
+In the $p=3m+2$ case, attaining the lower bound in (3.4) likewise forces
+$H_q=h$ for all $q$; otherwise the terminal strict coefficient would fall
+below $p^3$.  The branch sum must then be at least
+\[
+ p^3-A-(p-1)h=Lm+pm.
+\]
+Among nonincreasing integer sequences of length $L$, bounded above by
+$m+1$, and with sum at least $Lm+pm$, the sequence with $pm$ entries
+$m+1$ followed by $L-pm$ entries $m$ has the smallest prefix sums.
+It is therefore the least sequence in the order imposed by proximity.
+Substitution in
+$A+\sum_{q\leq j}H_q$ and in the branch prefix sums verifies every
+intermediate raw bound
+$p(j+1)$ and $p(p+r)$, with equality at the endpoint.  Hence no coefficient
+of any antinef majorant can be lowered, proving (3.2).
+
+The Hoskin--Deligne formula \cite{LIP93,LW03} now gives
+\[
+ M_p=\binom{A+1}{2}+(p+1)(p-1)\binom{H+1}{2}
+ +(p+1)p\sum_{i=1}^{L}\binom{K_i+1}{2}.
+\tag{3.5}
+\]
+Substitution and simplification yield (3.3).  For $p=3$, this is
+$120+48+72=240$; no finite profile is used in the derivation.
+\end{proof}
+
+\begin{corollary}[First transfer congruence]
+\label[corollary]{cor:first-transfer-congruence}
+For every prime $p$,
+\[
+ \tau_3(\A_2)\subseteq\LL_3+p\A_3.
+\]
+\end{corollary}
+
+\begin{proof}
+Under the coefficient pairing, the displayed inclusion is equivalent to
+$J_3\subseteq(x^{p^2},y^{p^2})$.  For $p\geq5$, the augmentation order of the complete
+ideal $J_3$ is the root point-basis coefficient $A$ in (3.2), and those
+formulas give $A\geq2p^2-1$ for $p\geq5$.  A monomial whose two exponents
+are both below $p^2$ has total degree at most $2p^2-2$; hence every element
+of $J_3$ lies in $(x^{p^2},y^{p^2})$.  For $p=2,3$, the two-lane exact
+certificate in \cref{app:exceptional-branches} constructs one point-fibre
+indicator in the modular depth-three line code and independently verifies
+its orthogonality to the full dual nullspace.  Affine translation gives all
+point fibres, which is the same inclusion.  Thus the congruence holds for
+every prime.
+\end{proof}
+
+The first cyclic diagonal block in the relative top shell has a unit count
+$a_0$ which must not be confused with $m_0=M_p$.
+
+\begin{proposition}[Cyclic unit count]
+\label[proposition]{prop:a0}
+\[
+ a_0=\begin{cases}
+ 8,&p=2,\\
+ 108,&p=3,\\[1mm]
+ \dfrac{(p-1)(3p^5+2p^4+2p^2+2)}{18},
+ &p>3,\ p\equiv1\pmod3,\\[3mm]
+ \dfrac{p(p+1)(12p^4-16p^3+10p^2-3p+1)}{72},
+ &p\equiv2\pmod3.
+ \end{cases}
+\tag{3.6}
+\]
+\end{proposition}
+
+\begin{proof}
+Write a cyclic index as $j=a+bp+cp^2$.  The Weber--K\"unzer valuation
+\cite{WK04} becomes
+\[
+ \beta_p(j)=a+(2p-1)b+p(3p-2)c.
+\]
+The unit count is the sum of $p^2(p-1)-\beta_p(j)$ over the region where
+this quantity is positive.  For $p=6h+1$, the region consists of
+$0\leq c\leq2h-1$ with all $a,b$, followed by the two boundary slices
+$c=2h$ and $b=2h$.  For $p=6h+5$, it consists of
+$0\leq c\leq2h$ with all $a,b$ and the slice
+$c=2h+1$, $0\leq b\leq5h+3$.  Summing these arithmetic progressions gives
+(3.6); $p=2,3$ are the degenerate boundary cases and are evaluated
+directly.
+\end{proof}
+
+\section{Tripotent sectors and the reduced \texorpdfstring{$q$}{q}-Pascal
+\texorpdfstring{\protect\\}{ }common image}
+\label{sec:sector}
+
+Fix a prime $p$.  Put
+\[
+ k=\F_p,\qquad N=p^3,\qquad N_0=p^2,\qquad e=N-N_0,
+ \qquad \overline\OO=k[s]/(s^e),\qquad\zeta=1+s.
+\]
+The phrase ``$q$-Pascal'' is a conventional name.  Whenever a Gaussian
+polynomial variable is required below it is denoted by $\mathfrak q$; the
+letters $r,t,u$ denote residue-class labels and $h$ denotes an ordinary
+integer in a congruence decomposition of $p$.  Thus no residue integer is
+also the $q$-Pascal indeterminate.
+
+Define the source and the two different chart targets by
+\[
+ \begin{aligned}
+ U_N^X&=k[X]/((X-1)^e),&
+ R_N^Y&=k[Y]/((Y-1)^N),\\
+ U_N^Y&=k[Y]/((Y-1)^e),&
+ D_1&=U_N^X\otimes_kR_N^Y,\\
+ E_{\mathcal A}&=\overline\OO^{\Z/N\Z},&
+ E_{\mathcal X}&=\overline\OO^{\Z/N_0\Z}.
+ \end{aligned}
+\]
+The modular chart maps have the explicit types
+\[
+ \begin{aligned}
+ \mathcal A:D_1&\longrightarrow E_{\mathcal A},&
+ \mathcal A(b)_t&=b(\zeta,\zeta^t),\quad t\in\Z/N\Z,\\
+ \mathcal X:D_1&\longrightarrow E_{\mathcal X},&
+ \mathcal X(b)_u&=b(\zeta^{pu},\zeta),\quad u\in\Z/N_0\Z.
+ \end{aligned}
+\tag{4.1}
+\]
+Let $\rho_Y:R_N^Y\twoheadrightarrow U_N^Y$ be truncation and let
+$\iota_Y:U_N^Y\to R_N^Y$ be the degree-below-$e$ $k$-linear section.  Put
+\[
+ \pi=\id\otimes(\iota_Y\rho_Y),\qquad
+ V_0=\ker\pi,\qquad E=\im\pi=U_N^X\otimes_kU_N^Y.
+\]
+On $E$ let $\tau$ exchange the two truncated tensor factors, and extend it
+to the tripotent $S=\tau\pi:D_1\to D_1$.  Then $S^2=\pi$, $S^3=S$,
+$S|_{V_0}=0$, and $S|_E=\tau$.  Direct evaluation of a multiple of
+$(Y-1)^e$ shows
+\[
+ \mathcal A(V_0)=\mathcal X(V_0)=0,\qquad
+ \mathcal A=\mathcal A\pi,\qquad \mathcal X=\mathcal X\pi.
+\]
+Write $K_{\mathcal A}=\ker\mathcal A$ and
+$K_{\mathcal A\mathcal X}=\ker\mathcal A\cap\ker\mathcal X$.
+
+\begin{definition}[First integral obstruction]
+\label[definition]{def:epsilon-one}
+The depth-three obstruction used in the Smith assembly is
+\[
+ \eps_1(p,3):=\rank_k
+ \begin{bmatrix}\mathcal A\\ \mathcal A S\end{bmatrix}
+ -\rank_k\mathcal A
+ =\rank_k\bigl((\mathcal AS)|_{K_{\mathcal A}}\bigr).
+\tag{4.2}
+\]
+The second equality follows by projecting the stacked image onto its first
+coordinate.
+\end{definition}
+
+Let
+\[
+ \jmath_{\mathrm{nu}}:E_{\mathcal X}\hookrightarrow E_{\mathcal A},
+ \qquad
+ (\jmath_{\mathrm{nu}}f)_t=
+ \begin{cases}f_u,&t=pu\text{ with }u\in\Z/N_0\Z,\\
+ 0,&p\nmid t.
+ \end{cases}
+\tag{4.3}
+\]
+Every nonunit class $t\bmod N$ has a unique expression $t=pu$ with
+$u\bmod N_0$, so this is a well-defined injective $k$-linear map.  The
+notation $\jmath_{\mathrm{nu}}^{-1}$ below means its inverse only on the
+supported subspace $\im\jmath_{\mathrm{nu}}$.
+
+From this point through \cref{sec:newton} assume that $p$ is odd.  The
+definition in \cref{def:epsilon-one} and the characteristic-free tripotent
+rank identity remain valid at $p=2$, but the eigenspace splitting and the
+factor $1/2$ below do not.
+
+\begin{theorem}[Common-image reduction]
+\label[theorem]{thm:common-image}
+Let $E=\im\pi=E_+\oplus E_-$ be the $\pm1$ eigenspace decomposition of
+$\tau$, and put
+\[
+ \mathcal A_+=\mathcal A|_{E_+},\qquad
+ \mathcal A_-=\mathcal A|_{E_-},\qquad
+ J_p^{\mathrm{full}}=\im\mathcal A_+\cap\im\mathcal A_-.
+\]
+These images and their intersection are $k$-subspaces of
+$E_{\mathcal A}$; no $\overline\OO$-module structure is used here.  Define
+\[
+ \begin{aligned}
+ \Fib_p&=\ker[\mathcal A_+,-\mathcal A_-]
+       \subset E_+\oplus E_-,\\
+ N_{\Fib}&=\ker\mathcal A_+\oplus\ker\mathcal A_-,\\
+ c_{\Fib}:\Fib_p/N_{\Fib}&\longrightarrow J_p^{\mathrm{full}},&
+ [(x,y)]&\longmapsto\mathcal A_+x=\mathcal A_-y.
+ \end{aligned}
+\]
+Then $c_{\Fib}$ is an isomorphism and
+\[
+ \eps_1(p,3)=\dim_kJ_p^{\mathrm{full}}.
+\tag{4.4}
+\]
+Moreover, $J_p^{\mathrm{full}}$ is supported on the nonunit slopes and the
+transport $2\jmath_{\mathrm{nu}}^{-1}$ identifies it with
+\[
+ J_p^{\mathrm{red}}:=
+ 2\jmath_{\mathrm{nu}}^{-1}(J_p^{\mathrm{full}})
+ =\mathcal X(K_{\mathcal A})\subset E_{\mathcal X}.
+\tag{4.5}
+\]
+\end{theorem}
+
+\begin{proof}
+For any tripotent $S$, projection of
+$v\mapsto(\mathcal Av,\mathcal ASv)$ onto its first coordinate shows that
+the rank gap is $\rank(\mathcal AS|_{\ker\mathcal A})$.  Since
+$\mathcal A(V_0)=0$, the zero sector disappears.  On $E_+\oplus E_-$ the
+invertible target change $(a,b)\mapsto((a+b)/2,(a-b)/2)$ turns the stacked
+map into the direct sum of the two sector maps.  Subtracting the rank of
+$\mathcal A$ leaves precisely the dimension of their common image.  The
+map $c_{\Fib}$ is onto by the definition of the intersection, and its
+kernel before quotienting is exactly $N_{\Fib}$.
+
+Put $P_+=(\pi+S)/2$ and $P_-=(\pi-S)/2$.  The map
+\[
+ \Gamma:K_{\mathcal A}\longrightarrow\Fib_p,\qquad
+ b\longmapsto(P_+b,-P_-b)
+\]
+is onto: a preimage of $(x,y)\in\Fib_p$ is $b=x-y$.  It has kernel $V_0$,
+and
+\[
+ c_{\Fib}[\Gamma(b)]=\frac12\mathcal ASb.
+\tag{4.6}
+\]
+For $b\in K_{\mathcal A}$, the exact exchange identity is
+\[
+ (\mathcal ASb)_t=0\quad(p\nmid t),\qquad
+ (\mathcal ASb)_{pu}=\mathcal X(b)_u.
+\]
+Consequently
+\[
+ c_{\Fib}\Gamma=\frac12\jmath_{\mathrm{nu}}
+ \mathcal X|_{K_{\mathcal A}}.
+\tag{4.7}
+\]
+Surjectivity of $c_{\Fib}\Gamma$ proves the support assertion and (4.5).
+The factor $2$ is a unit because $p$ is odd.
+\end{proof}
+
+The reduced image has a sparse $q$-Pascal presentation.  For
+$0\leq i<N$ and $0\leq k<e$, define
+\[
+ E_p(i,k)_r=(1-\zeta^{pr})^kC_i(r),\qquad
+ C_i(r)=\sum_{j=i}^{N-1}\zeta^j
+ \genfrac{[}{]}{0pt}{}{j}{i}_{\zeta^{-pr}},
+ \quad 0\leq r<p^2.
+\tag{4.8}
+\]
+Let
+\[
+ \beta_p(n)=\sum_{d=1}^{n}p^{v_p(d)},\qquad
+ \lambda_i=\beta_p(N-1-i).
+\tag{4.9}
+\]
+The source labels satisfy $\max(e-\lambda_i,0)\leq k<e$.
+
+\begin{corollary}[$q$-Pascal presentation]
+\label[corollary]{cor:qpascal}
+After removing only columns proved identically zero,
+\[
+ J_p^{\mathrm{red}}=\im(E_p),\qquad
+ \eps_1(p,3)=\rank_k(E_p).
+\tag{4.10}
+\]
+\end{corollary}
+
+\begin{proof}
+The reduced fibre product $\Fib_p/N_{\Fib}$ is $J_p^{\mathrm{full}}$ by
+\cref{thm:common-image}.  The Newton basis of $K_{\mathcal A}$ supplies the
+columns (4.8), and the exchange identity in
+the proof of \cref{thm:common-image} identifies their image with the
+transported fibre product.  Quotienting by the column-relation space proves
+(4.10).
+\end{proof}
+
+\section{Exact \texorpdfstring{$\mathfrak q$}{q}-Lucas block product
+\texorpdfstring{\protect\\}{ }and support}
+\label{sec:block}
+
+For $r\in\Z/p^2\Z$, put $Q_r=\zeta^{-pr}$ and let
+\[
+ L=L_r=\ord(Q_r)=
+ \begin{cases}1,&r=0,\\p,&r\neq0,\ p\mid r,\\p^2,&p\nmid r,
+ \end{cases}
+ \qquad M=N/L.
+\]
+Write $i=dL+c$ with $0\leq c<L$.
+
+\begin{lemma}[$\mathfrak q$-Lucas evaluation]
+\label[lemma]{lem:qlucas}
+The evaluation $\mathfrak q\mapsto Q_r$ kills $p$ and
+$\Phi_L(\mathfrak q)$.  Hence, for
+$0\leq b<L$,
+\[
+ \genfrac{[}{]}{0pt}{}{aL+b}{dL+c}_{Q_r}
+ =\binom ad\genfrac{[}{]}{0pt}{}{b}{c}_{Q_r}.
+\tag{5.1}
+\]
+\end{lemma}
+
+\begin{proof}
+If $L=p^a$, then in characteristic $p$,
+$\Phi_{p^a}(Z)=(Z-1)^{p^{a-1}(p-1)}$.  For $L=p^2$ the order of
+$Q_r-1$ is $p$, while for $L=p$ it is $p^2$; in both cases the displayed
+power has order $e$ and vanishes in $\overline\OO$.  Sagan's congruence
+\cite[Theorem~2.2]{SAG92} therefore applies.  The case $L=1$ is ordinary
+Lucas.
+\end{proof}
+
+Two finite identities will be used:
+\begin{align}
+ \sum_{a=d}^{M-1}\binom adx^a
+ &=x^d(1-x)^{M-1-d},\tag{5.2}\label{eq:ordinary-block}\\
+ \sum_{b=c}^{L-1}x^b\genfrac{[}{]}{0pt}{}{b}{c}_{Q}
+ &=x^c\prod_{h=c+1}^{L-1}(1-xQ^h),\tag{5.3}\label{eq:cyclotomic-block}
+\end{align}
+where $M$ is a power of $p$ and $\Phi_L(Q)=0$.  The first follows by
+extracting a coefficient from a finite geometric series and using
+Frobenius.  The second is the finite $\mathfrak q$-binomial theorem after the standard
+root-of-unity symmetry
+$ \genfrac{[}{]}{0pt}{}{L-1-c}{t}_{Q}
+=(-1)^tQ^{-ct-t(t+1)/2}\genfrac{[}{]}{0pt}{}{c+t}{c}_{Q}$.
+
+\begin{theorem}[Exact block product and support]
+\label[theorem]{thm:block-product}
+For every odd prime, slope and index,
+\[
+ C_i(r)=\zeta^i(1-\zeta^L)^{M-1-d}
+ \prod_{h=c+1}^{L-1}(1-\zeta^{1-prh}).
+\tag{5.4}
+\]
+Consequently
+\[
+ C_i(r)=
+ \begin{cases}
+ (-1)^is^{N-1-i}+O(s^{N-i}),&N-1-i<e,\\
+ 0,&N-1-i\geq e,
+ \end{cases}
+\tag{5.5}
+\]
+ and the column $(i,k)$ in (4.8) is nonzero exactly when
+\[
+ \max(e-\lambda_i,0)\leq k<e,\qquad N-1-i+pk<e.
+\tag{5.6}
+\]
+\end{theorem}
+
+\begin{proof}
+Write $j=aL+b$ in (4.8).  Applying \cref{lem:qlucas} separates the sum
+into the two factors in \eqref{eq:ordinary-block} and
+\eqref{eq:cyclotomic-block}, which gives (5.4).  Since
+$1-\zeta^L=-s^L$ and every $1-\zeta^{1-prh}$ begins with $-s$, its total
+order is
+\[
+ L(M-1-d)+(L-1-c)=N-1-i.
+\]
+The parity of the number of negative factors is the parity of $i$, proving
+(5.5).  On a unit slope,
+$1-\zeta^{pr}=-r_0s^p+O(s^{2p})$; this proves sufficiency in (5.6).
+Nonunit slopes have no smaller prefactor order, proving necessity.
+\end{proof}
+
+The equality (5.4) belongs to the truncated target $\overline\OO$; it is
+not an equality in the unquotiented group algebra.  It resolves cancellation
+inside a single column but does not yet control relations among columns.
+
+\section{Boundary generation and the
+\texorpdfstring{\protect\\}{ }Newton-minors theorem}
+\label{sec:newton}
+
+Put $u=\zeta^p=1+s^p$ and $T_r=1-u^r$.  Reverse the column index by
+\[
+ \mathcal C_t(r)=C_{N-1-t}(r),\qquad
+ F_{t,K}(r)=T_r^K\mathcal C_t(r).
+\tag{6.1}
+\]
+The surviving labels are exactly
+\[
+ K+\beta_p(t)\geq e,\qquad t+pK<e.
+\tag{6.2}
+\]
+Let $W=\im(E_p)\subset\overline\OO^{p^2}$, initially only as a $k$-space.
+
+\begin{lemma}[Scalar recurrence and module closure]
+\label[lemma]{lem:recurrence}
+With $c=s\zeta^{-1}$,
+\[
+ cF_{t,K}=\sum_{\ell=1}^{t+1}(-1)^{\ell+1}
+ \binom{t+1}{\ell}F_{t,K+\ell}-F_{t+1,K}.
+\tag{6.3}
+\]
+All coefficients are in $k$ and independent of $r$.  Consequently $W$ is
+an $\overline\OO$-submodule of $\overline\OO^{p^2}$.
+\end{lemma}
+
+\begin{proof}
+The exact recurrence before expansion is
+$F_{t+1,K}=-cF_{t,K}+[t+1]_{u^r}F_{t,K+1}$.  Since
+\[
+ T_r[t+1]_{u^r}=1-(1-T_r)^{t+1},
+\]
+binomial expansion gives (6.3).  Every nonzero term remains admitted or is
+zero by the support boundary, so $cW\subseteq W$.  Finally $c^e=0$ and
+$s=c/(1-c)=c+\cdots+c^{e-1}$, hence $sW\subseteq W$.
+\end{proof}
+
+Define
+\[
+ \mu_p(x)=\min\{t\geq0:\beta_p(t)\geq x\},\qquad
+ t_K=\mu_p(e-K),\qquad G_K=F_{t_K,K},
+\tag{6.4}
+\]
+and
+\[
+ a_K=t_K+pK,\qquad
+ H_p=\#\{0\leq K<p(p-1):a_K<e\}.
+\tag{6.5}
+\]
+Here $G_K$ is a vector and $H_p$ is an integer.  These types are fixed
+throughout the paper.
+
+\begin{lemma}[Boundary generation]
+\label[lemma]{lem:boundary}
+The nonzero boundary indices are $0\leq K<H_p$, and
+\[
+ W=\sum_{K=0}^{H_p-1}\overline\OO G_K.
+\tag{6.6}
+\]
+\end{lemma}
+
+\begin{proof}
+Since $\mu_p(x)-\mu_p(x-1)\in\{0,1\}$,
+$a_{K+1}-a_K\geq p-1$, so the nonzero indices form an initial interval.
+For the induction in $t$, one needs the following Lucas admission step:
+if $\binom t\ell\not\equiv0\pmod p$, then
+\[
+ \ell\geq p^{v_p(t)}=\beta_p(t)-\beta_p(t-1).
+\]
+Indeed, Lucas forces the first $v_p(t)$ digits of $\ell$ to vanish.  Apply
+(6.3) at $(t-1,K)$ and solve for $F_{t,K}$.  Every term with nonzero
+coefficient remains admitted by the displayed inequality and has smaller
+first index; induction reaches $G_K$.
+\end{proof}
+
+Lift to $R=k[[s]]$.  Define
+\[
+ \widetilde{\mathcal C}_t(r)=\zeta^{-1}
+ \prod_{\ell=1}^{t}(\zeta^{-1}-u^{r\ell}),\qquad
+ \widetilde G_K(r)=T_r^K\widetilde{\mathcal C}_{t_K}(r).
+\tag{6.7}
+\]
+Put $X_r=[r]_u$ and
+$Q_j(r)=\genfrac{[}{]}{0pt}{}{r}{j}_u$.  The matrix
+$(Q_j(r))_{0\leq r,j<p^2}$ is lower unitriangular, so the $Q_j$ form an
+$R$-basis of $R^{p^2}$.
+
+\begin{lemma}[Coefficient cost]
+\label[lemma]{lem:cost}
+There are a unit $\eta_t(s)$ and coefficients $h_{t,m}(s)$ such that
+\[
+ \widetilde{\mathcal C}_t
+ =s^t\eta_t(s)\sum_{m\geq0}h_{t,m}(s)X^m,\qquad
+ h_{t,0}=1,\qquad v_s(h_{t,m})\geq(p-1)m.
+\tag{6.8}
+\]
+\end{lemma}
+
+\begin{proof}
+Each factor in (6.7) is
+\[
+ -c+\sum_{d=1}^{\ell}(-1)^{d+1}\binom\ell d(1-u)^dX^d.
+\]
+After the constant term is factored, a selection with total $X$-degree
+$m$ has extra $s$-order at least $pm$ minus the number of selected factors,
+hence at least $(p-1)m$.  The all-constant selection is unique.
+\end{proof}
+
+Carlitz's integral identity \cite{CER18} is
+\[
+ X^n=\sum_{j=0}^{n}u^{\binom j2}S_u[n,j][j]_u!\,Q_j.
+\tag{6.9}
+\]
+For $j<p^2$, put
+\[
+ \phi_j=v_s([j]_u!)=p(\beta_p(j)-j),\qquad
+ \tau_p(K)=a_K+\phi_K=\mu_p(e-K)+p\beta_p(K).
+\tag{6.10}
+\]
+The sequence $\tau_p(K)$ is strictly increasing.
+
+\begin{theorem}[Newton-minors theorem]
+\label[theorem]{thm:newton-minors}
+Let $\mathcal M_p$ be the $p^2\times H_p$ matrix of the lifted boundary
+columns in the $\mathfrak q$-Newton row basis.  If $I_r$ is its ideal of $r\times r$
+minors, then
+\[
+ v_s(I_r)=\sum_{K=0}^{r-1}\tau_p(K)\qquad(1\leq r\leq H_p).
+\tag{6.11}
+\]
+Thus the Smith exponents over the DVR $R$ are exactly
+$\tau_p(0),\ldots,\tau_p(H_p-1)$.
+\end{theorem}
+
+\begin{proof}
+Combining \cref{lem:cost} with (6.9), every path
+$K\to K+m\to j$ contributing to row $j$ of column $K$ has order at least
+$a_K+\phi_j$; equality occurs for $m=0,j=K$.  For column indices
+$K_1<\cdots<K_r$ and row indices $J_1<\cdots<J_r$, every determinant
+monomial therefore has order at least
+\[
+ \sum_i a_{K_i}+\sum_i\phi_{J_i}
+ \geq\sum_{K=0}^{r-1}\tau_p(K).
+\]
+In the principal minor on rows and columns $0,\ldots,r-1$, the identity
+permutation with paths $m=0,j=K$ attains this bound uniquely.  A path with
+$m>0$ has positive extra cost; with $m=0$, Carlitz support requires
+$\pi(K)\leq K$ for each column, forcing the identity permutation.  Hence
+the minimum term cannot cancel, proving (6.11).  Successive differences of
+determinantal-ideal valuations are the DVR Smith exponents.
+\end{proof}
+
+\section{Arithmetic evaluation and the filtered common image}
+\label{sec:filtered}
+
+Reduction of the DVR Smith form modulo $s^e$, together with
+\cref{lem:boundary}, gives the obstruction dimension
+\[
+ \eps_1(p,3)=\sum_{K=0}^{p(p-1)-1}
+ \pos{e-\mu_p(e-K)-p\beta_p(K)}.
+\tag{7.1}
+\]
+
+Put
+\[
+ L_K=e-\tau_p(K)=e-\mu_p(e-K)-p\beta_p(K).
+\tag{7.2}
+\]
+
+\begin{lemma}[Exact inversion of $\beta_p$]
+\label[lemma]{lem:beta-inversion}
+Let $p>3$, write $p=6h+\rho$ with $\rho\in\{1,5\}$, and set
+$d=2p-1$.  For $0\leq K\leq M$ choose the branch constants
+\[
+\begin{array}{c|c|c|c|c}
+\rho&A&B_0&c&M\\ \hline
+1&2h&2h&4h&h(2p+1)\\[1mm]
+5&2h+1&5h+4&7h+5&\dfrac{p^2-1}{3}
+\end{array}
+\tag{7.3}
+\]
+and define
+\[
+ \begin{aligned}
+ R_K&=e-K-Ap(3p-2),\\
+ B_K&=\left\lceil\frac{R_K-(p-1)}d\right\rceil
+     =B_0-\left\lfloor\frac{K+c}{d}\right\rfloor,\\
+ C_K&=\max(0,R_K-dB_K),\\
+ \delta_K&=\max(0,dB_K-R_K)
+ =\max\bigl(0,((K+c)\bmod d)-(p-1)\bigr).
+ \end{aligned}
+\tag{7.4}
+\]
+Then $A,B_K,C_K$ are the base-$p$ digits of the least integer whose
+$\beta_p$-value is at least $e-K$, and
+\[
+ \mu_p(e-K)=Ap^2+R_K-(p-1)B_K+\delta_K.
+\tag{7.5}
+\]
+Consequently
+\[
+ \boxed{L_K=(p-1)\left(2Ap+B_0-K
+ -p\left\lfloor\frac Kp\right\rfloor
+ -\left\lfloor\frac{K+c}{2p-1}\right\rfloor\right)-\delta_K.}
+\tag{7.6}
+\]
+\end{lemma}
+
+\begin{proof}
+For $0\leq t<p^3$ the valuation-count identity is
+\[
+ \beta_p(t)=t+(p-1)\left\lfloor\frac tp\right\rfloor
+ +(p^2-p)\left\lfloor\frac t{p^2}\right\rfloor.
+\]
+Writing $t=Ap^2+Bp+C$ with $0\leq A,B,C<p$ therefore gives
+\[
+ \beta_p(t)=Ap(3p-2)+B(2p-1)+C.
+\tag{7.7}
+\]
+For the intervals in (7.3), direct substitution at $K=0,M$ keeps the
+first digit equal to the displayed $A$.  Once $A$ is fixed, the least
+$B$ for which the residual target can be reached with $0\leq C<p$ is
+$B_K$ in (7.4), and the least last digit is $C_K$.  Since
+$C_K=R_K-dB_K+\delta_K$, substitution into $Ap^2+B_Kp+C_K$ gives (7.5).
+The identity $R_0-(p-1)=B_0d-c$ gives the second formula for $B_K$ and the
+residue formula for $\delta_K$.  Finally, for $K<p^2$,
+$\beta_p(K)=K+(p-1)\lfloor K/p\rfloor$; inserting this and (7.5) into
+(7.2) gives (7.6).
+\end{proof}
+
+\begin{lemma}[Positive-tail endpoints and residue sums]
+\label[lemma]{lem:tail-endpoints}
+With the branch constants of \cref{lem:beta-inversion},
+\[
+ L_{M-1}=p-1,\qquad L_M=0,\qquad
+ L_K>0\Longleftrightarrow 0\leq K<M.
+\tag{7.8}
+\]
+Moreover, the two floor sums and the periodic ramp in (7.6) are
+\[
+\begin{array}{c|c|c}
+&p=6h+1&p=6h+5\\ \hline
+\displaystyle\sum_{K=0}^{M-1}\left\lfloor\frac Kp\right\rfloor
+&ph(2h-1)+2h^2
+&ph(2h+1)+(2h+1)(4h+3)\\[3mm]
+\displaystyle\sum_{K=0}^{M-1}\left\lfloor\frac{K+c}{2p-1}\right\rfloor
+&(2p-1)\dfrac{h(h-1)}2+6h^2
+&(2p-1)\dfrac{h(h+1)}2+(h+1)(p-1)\\[3mm]
+\displaystyle\sum_{K=0}^{M-1}\delta_K
+&3h^2p
+&(h+1)\dfrac{p(p-1)-h}{2}.
+\end{array}
+\tag{7.9}
+\]
+\end{lemma}
+
+\begin{proof}
+Substitution of (7.3) into (7.6) gives the two endpoint equalities.
+Strict increase of $\tau_p(K)$ from \cref{thm:newton-minors} makes $L_K$
+strictly decreasing, so they prove the last assertion of (7.8).  For the
+first row of (7.9), write $M=ap+b$ and sum $a$ complete residue blocks.
+For the second and third rows, write $K+c=j(2p-1)+r$ and sum separately
+over $0\leq r<2p-1$ and the terminal block; the ramp is nonzero precisely
+for $p\leq r<2p-1$.  The complete residue decompositions are displayed in
+\cref{app:arithmetic-blocks}; they give (7.9) without an asymptotic or
+interpolation step.
+\end{proof}
+
+\begin{theorem}[Closed odd-prime obstruction]
+\label[theorem]{thm:epsilon}
+For odd primes,
+\[
+ \eps_1(p,3)=\FCIGDThreeEpsilonClosedFormula
+\tag{7.10}
+\]
+\end{theorem}
+
+\begin{proof}
+For $p>3$, \cref{lem:tail-endpoints} reduces (7.1) to
+$\sum_{K=0}^{M-1}L_K$.  Summing (7.6), using
+$\sum_{K=0}^{M-1}K=M(M-1)/2$, and substituting the three exact rows of
+(7.9) gives the two polynomials in (7.10).  For $p=3$, the active
+thresholds are $9,12,15$ and $e=18$, so the sum is
+$(18-9)+(18-12)+(18-15)=18$.
+\end{proof}
+
+\begin{theorem}[Filtered common-image profile]
+\label[theorem]{thm:filtered-profile}
+As an $\overline\OO$-module,
+\[
+ W\cong\bigoplus_{\substack{0\leq K<H_p\\\tau_p(K)<e}}
+ \overline\OO/(s^{e-\tau_p(K)}).
+\tag{7.11}
+\]
+For the ambient filtration
+$F^d_{\mathrm{amb}}W=W\cap s^d\overline\OO^{p^2}$,
+\[
+ \dim_k(F^d_{\mathrm{amb}}W/F^{d+1}_{\mathrm{amb}}W)
+ =\#\{0\leq K<H_p:\tau_p(K)\leq d<e\}.
+\tag{7.12}
+\]
+Hence
+\[
+ \Hilb_W^{\mathrm{amb}}(z)=
+ \sum_{\substack{0\leq K<H_p\\\tau_p(K)<e}}
+ z^{\tau_p(K)}\frac{1-z^{e-\tau_p(K)}}{1-z}.
+\tag{7.13}
+\]
+The minimal number of generators is
+\[
+ \ngen_{\overline\OO}(W)=\dim_k(W/sW)=
+ \begin{cases}
+ 3,&p=3,\\[1mm]
+ \dfrac{(p-1)(2p+1)}6,&p\equiv1\pmod6,\\[3mm]
+ \dfrac{p^2-1}{3},&p\equiv5\pmod6.
+ \end{cases}
+\tag{7.14}
+\]
+\end{theorem}
+
+\begin{proof}
+Invertible Smith row operations over $R$ preserve every ambient power
+$s^dR^{p^2}$.  Reduction modulo $s^e$ turns the active diagonal with
+threshold $\tau_p(K)$ into the embedded ideal
+$s^{\tau_p(K)}\overline\OO$, proving (7.11)--(7.12).  Summing the successive
+dimensions gives (7.13).  Nakayama's lemma counts one generator for each
+nonzero cyclic summand, and the positive-tail counts in the proof of
+\cref{thm:epsilon} give (7.14).
+\end{proof}
+
+The boundary-column count and generator count are different invariants:
+\[
+\begin{array}{c|rrrr}
+p&3&5&7&11\\ \hline
+H_p&3&12&28&71\\
+\ngen_{\overline\OO}(W)&3&8&15&40.
+\end{array}
+\tag{7.15}
+\]
+
+\begin{corollary}[Truncation redundancy]
+\label[corollary]{cor:redundancy}
+\[
+ H_p-\ngen_{\overline\OO}(W)
+ =\#\{0\leq K<H_p:\tau_p(K)\geq e\}
+\tag{7.16}
+\]
+counts the Smith directions in the boundary presentation eliminated by
+truncation modulo $s^e$.
+\end{corollary}
+
+This is a numerical structural statement.  It does not assert that a
+particular named subset of the original boundary columns is zero.
+
+\section{The cross-chart transfer defect}
+\label{sec:o2}
+
+Let $\eta_2:\QQ_2/p\QQ_2\to p\QQ_3/p^2\QQ_3$ be induced by transfer and
+put $d_p=\dim_k\ker\eta_2$.  The equality
+\[
+ \tau_3(\QQ_2)\cap p^2\QQ_3=\tau_3(p\QQ_2)
+\tag{O2}
+\]
+is equivalent to $d_p=0$.
+
+\begin{lemma}[Defect bookkeeping]
+\label[lemma]{lem:defect}
+Let $T_{\geq3}=m_3+m_4+m_5$.  Then
+\[
+ T_{\geq3}=a_0+\eps_1(p,3)+d_p.
+\tag{8.1}
+\]
+\end{lemma}
+
+\begin{proof}
+The multiscale identity gives $p^3\QQ_3=\tau_3(p\QQ_2)$.  The natural map
+$p^2\QQ_3/p^3\QQ_3\to p^2(\QQ_3/\tau_3\QQ_2)$ is onto, with kernel
+\[
+ \frac{\tau_3\QQ_2\cap p^2\QQ_3}{\tau_3(p\QQ_2)},
+\]
+whose dimension is $d_p$.  The relative top-shell calculation gives
+$a_0+\eps_1$ for the target dimension, proving (8.1).
+\end{proof}
+
+We now define the carry objects used to kill this defect.  Let
+\[
+ \mathscr R_2=k[G,H]/(G^{N_0}-1,H^{N_0}-1),\qquad
+ x=G-1,\quad y=H-1,
+\]
+identified with the $k$-space of functions on the coarse point set
+$G_2=(\Z/N_0\Z)^2$.  With $\iota([g])=[-g]$, use the Frobenius pairing
+$\langle a,b\rangle=[1](a\iota(b))$.  For $\delta\in\mathbb P^1(k)$ choose
+\[
+ \begin{array}{c|cc}
+ \delta&g_\delta&t_\delta\\ \hline
+ \delta\in k&GH^\delta&H\\
+ \infty&H&G,
+ \end{array}
+ \qquad z_\delta=g_\delta-1,\quad v_\delta=t_\delta-1,
+\]
+and define the tangent-bundle ideal and line code
+\[
+ I_\delta=(z_\delta,v_\delta^p)^p,\qquad
+ \mathcal C_{2,\delta}=I_\delta^\perp,\qquad
+ \mathcal C_2=\sum_{\delta\in\mathbb P^1(k)}\mathcal C_{2,\delta}.
+\tag{8.2}
+\]
+The normal-to-tangent conversion is
+\[
+ \kappa(0)=\infty,\qquad \kappa(d)=-d^{-1}\ (d\in k^\times),
+ \qquad \kappa(\mathrm{cross})=0.
+\tag{8.3}
+\]
+
+For $b\in K_{\mathcal A}$ choose a compatible integral lift
+$\widetilde b$ in the fixed cyclotomic lattice and write its first-chart
+remainders as
+\[
+ A_t(\widetilde b)=\sum_{j<e}a_{t,j}\zeta^j.
+\]
+Every $a_{t,j}$ is divisible by $p$.  If moreover
+$b\in K_{\mathcal A\mathcal X}$, write
+\[
+ X_u(\widetilde b)=\sum_{j<e}x_{u,j}\zeta^j;
+\]
+then every $x_{u,j}$ is divisible by $p$ as well.  If $o\in\Z/N\Z$, let
+$[c_{\bullet}]_{o}^{<e}$ mean $c_{[o]_N}$ when $0\leq[o]_N<e$ and zero
+when $e\leq[o]_N<N$.  For $(r,s)\in G_2$ put
+\[
+ o_t(r,s)=[e+r+t(e+s)]_N,\qquad
+ o_u^{\mathcal X}(r,s)=[pu(e+r)+e+s]_N.
+\tag{8.4}
+\]
+The first-chart residue carries and the cross carry are the typed maps
+\[
+ \begin{gathered}
+ \mathcal H_d:K_{\mathcal A}\longrightarrow\mathscr R_2
+ \quad(d\in k),\\
+ \mathcal H_X:K_{\mathcal A\mathcal X}\longrightarrow\mathscr R_2,\\
+ \mathcal H_A:=\sum_{d\in k}\mathcal H_d:
+ K_{\mathcal A}\longrightarrow\mathscr R_2.
+ \end{gathered}
+\]
+Their values on compatible lifts are
+\[
+ \begin{aligned}
+ \mathcal H_d(b)(r,s)
+ &=\sum_{\substack{t\bmod N\\t\equiv d\bmod p}}
+   \frac{[a_{t,\bullet}]_{o_t(r,s)}^{<e}}p\pmod p,\\
+ \mathcal H_X(b)(r,s)
+ &=\sum_{u\bmod N_0}
+   \frac{[x_{u,\bullet}]_{o_u^{\mathcal X}(r,s)}^{<e}}p\pmod p.
+ \end{aligned}
+\tag{8.5}
+\]
+Division is performed only after an integral candidate relation has been
+combined, so its coefficients are divisible by $p$.  If the compatible
+lift is changed by $p h$, the change in (8.5) is an ordinary carrier in the
+corresponding line bundle; hence the map
+\[
+ \delta_1:K_{\mathcal A\mathcal X}\longrightarrow
+ \mathscr R_2/\mathcal C_2,
+ \qquad
+ \delta_1(b)=[\mathcal H_A(b)+\mathcal H_X(b)]
+\tag{8.6}
+\]
+is independent of the lift.
+
+For an integral representative define the one-way exchange
+\[
+ \widetilde S(\widetilde b)=
+ \operatorname{Rem}_{\Phi_{p^3}(X)}\widetilde b(Y,X),
+\tag{8.7}
+\]
+with monic remainder in $X$.  Modulo $p$,
+$\Phi_{p^3}(X)=(X-1)^e$; hence this reduction is exactly the tripotent
+$S=\tau\pi:D_1\to D_1$ defined in \cref{sec:sector}, rather than a second
+operator with the same name.
+
+\begin{lemma}[Carry transposition]
+\label[lemma]{lem:carry-transpose}
+For odd $p$,
+\[
+ S(K_{\mathcal A\mathcal X})\subset K_{\mathcal A},\qquad
+ \mathcal H_0(Sb)(r,s)=\mathcal H_X(b)(s,r).
+\tag{8.8}
+\]
+If $P$ is point transposition, $(Pf)(r,s)=f(s,r)$, then
+\[
+ P(\mathcal C_{2,\infty})=\mathcal C_{2,0}.
+\tag{8.9}
+\]
+\end{lemma}
+
+\begin{proof}
+Monic division in (8.7) gives the integral identities
+\[
+ A_t(\widetilde S\widetilde b)=\widetilde b(\zeta^t,\zeta),
+ \qquad A_{pu}(\widetilde S\widetilde b)=X_u(\widetilde b).
+\tag{8.10}
+\]
+For a unit $t$, the automorphism $\zeta\mapsto\zeta^t$ transports the
+vanishing of $\mathcal A(b)$ at $t^{-1}$ to the first expression in
+(8.10); for a nonunit $t=pu$, the second kernel condition applies.  This
+proves the inclusion.  The second identity in (8.10) identifies the
+integer coefficient arrays, while
+\[
+ o_{pu}(r,s)=e+r+pu(e+s)=o_u^{\mathcal X}(s,r)\pmod N.
+\]
+Thus clipping, division and summation agree term by term, proving (8.8).
+Finally, transposition takes the $p$ depth-two lines with normals $(1,pu)$
+to those with normals $(pu,1)$, proving (8.9).
+\end{proof}
+
+To state the seed calculation, let
+$\rho_p:D_1\to\mathscr R_2$ reduce both exponents modulo $N_0$, put
+\[
+ P_j(X,Y)=\prod_{a=0}^{j-1}(Y-X^a),\qquad
+ b_{j,\nu}=(X-1)^\nu P_j(X,Y),\qquad
+ \nu\geq\max(e-\beta_p(j),0),
+\tag{8.11}
+\]
+and let $\Pi_0$ retain the monomials whose $Y$-degree is divisible by $p$.
+
+\begin{lemma}[Newton kernel basis]
+\label[lemma]{lem:newton-kernel-basis}
+The vectors
+\[
+ b_{j,\nu},\qquad 0\leq j<N,\quad
+ \max(e-\beta_p(j),0)\leq\nu<e,
+\]
+form a $k$-basis of $K_{\mathcal A}$.
+\end{lemma}
+
+\begin{proof}
+Each $P_j$ is monic of degree $j$ in $Y$, so the transition from
+$\{(X-1)^\nu Y^j\}$ to $\{(X-1)^\nu P_j\}$ is unitriangular over
+$k[X]/((X-1)^e)$.  Moreover
+\[
+ P_j(\zeta,\zeta^t)
+ =P_j(\zeta,\zeta^j)
+   \genfrac{[}{]}{0pt}{}{t}{j}_{\zeta},
+\]
+where the Gaussian-Pascal matrix is lower unitriangular in $t,j$.
+Invertible row operations therefore diagonalize first-chart evaluation with
+diagonal entries
+\[
+ d_j=P_j(\zeta,\zeta^j)
+ =\prod_{a=0}^{j-1}(\zeta^j-\zeta^a).
+\]
+For $1\leq d\leq j$, the factor $\zeta^d-1$ is a unit times
+$s^{p^{v_p(d)}}$; hence $d_j$ is a unit times
+$s^{\beta_p(j)}$.  In $\overline\OO=k[s]/(s^e)$ the kernel of
+multiplication by $d_j$ is exactly
+$s^{\max(e-\beta_p(j),0)}\overline\OO$, whose displayed powers of $s$
+form a $k$-basis.  Taking the direct sum over $j$ proves the claim.
+\end{proof}
+
+For a
+first-chart residue $d$, the $p+1$ mixed differences generating
+$I_{\kappa(d)}$ give functionals
+$\lambda_{d,c}(b)$, $0\leq c\leq p$, by applying
+$z_{\kappa(d)}^{p-c}(v_{\kappa(d)}^p)^c$ to $\mathcal H_d(b)$.
+
+\begin{lemma}[Seed-defect factorization and annihilation]
+\label[lemma]{lem:seed-annihilation}
+For every odd prime, every residue $d$ and $b\in K_{\mathcal A}$,
+\[
+ \lambda_{d,c}(b)=\rho_p(b)S_{d,c},\qquad0\leq c\leq p,
+\tag{8.12}
+\]
+where, with $y_d=G^{-d}H-1$,
+\begin{align}
+ S_{d,0}&=-y_d^p+x^{p(p-1)}y_d^{p(p-1)}C_p(y_d),\notag\\
+ S_{d,c}&=x^{pc}(y_d^{N_0-c}-y_d^{p-c})\quad(1\leq c<p),\notag\\
+ S_{d,p}&=0,\qquad
+ C_p(Y)=\sum_{a=1}^{p-1}\left(\frac1p\binom pa\bmod p\right)Y^a.
+\tag{8.13}
+\end{align}
+The auxiliary carrier seeds are
+\[
+ \begin{aligned}
+ B^0_{d,0}&=x^{p(p-1)}y_d^{p(p-1)}C_p(y_d),\\
+ B^0_{d,c}&=x^{pc}y_d^{N_0-c}\quad(1\leq c<p),
+ &B^0_{d,p}&=0.
+ \end{aligned}
+\]
+They satisfy, on every admissible Newton basis vector,
+\[
+ \rho_p(b_{j,\nu})B^0_{d,c}=0,\qquad
+ \rho_p(\Pi_0b_{j,\nu})B^0_{d,c}=0.
+\tag{8.14}
+\]
+The second equality is the Cartier constant-term assertion.
+\end{lemma}
+
+\begin{proof}
+Let $\sigma(n,o)$ be the coefficient of $\zeta^o$ in the standard
+representative of $\zeta^n$ modulo $\Phi_{p^3}$, extended by zero for
+$e\leq o<N$.  The last cyclotomic block gives exactly
+\[
+ \sigma(n,o)-\mathbf1_{o\equiv n\ (N)}
+ =-\mathbf1_{[n]_N\geq e}\mathbf1_{o\equiv n\ (N_0)}.
+ \tag{8.15}
+\]
+ We give the residue-packet calculation explicitly.  For a source monomial
+ $m=X^iY^j$, put $J=[j]_p$ and, at the point $(r,s)$, put $S=[s]_p$.  Its
+ undivided residue-$d$ carrier is
+ \[
+  T_d(m)(r,s)=\sum_{u\bmod N_0}
+  \sigma\bigl(i+(d+pu)j,o_{d+pu}(r,s)\bigr).
+ \tag{8.15a}
+ \]
+ Write $u=u_0+pv$, with $u_0,v\in k$.  The common $N_0$-tail condition is
+ \[
+  r+(d+pu_0)s\equiv i+(d+pu_0)j\pmod {N_0};
+ \]
+ denote its solution set in $u_0$ by $U$.  For $u_0\in U$, the source and
+ clipped-point top-block digits have the form $A+Jv$ and $B+Sv$.  By
+ (8.15), the complete $v$-packet is
+ \[
+  \mathsf P(A,B;J,S)=
+  \sum_{v\in k}\mathbf1_{B+Sv\ne-1}
+  \bigl(\mathbf1_{A+Jv=B+Sv}-\mathbf1_{A+Jv=-1}\bigr).
+ \tag{8.15b}
+ \]
+ The four possibilities are as follows; the last column is evaluated for
+ each $u_0\in U$.
+ \[
+ \begin{array}{c|c|c}
+ (J,S)&|U|&\mathsf P(A,B;J,S)\pmod p\\ \hline
+ J\ne S,\ J\ne0&0\text{ or }1&0\\
+ J\ne S,\ J=0&0\text{ or }1&1\\
+ J=S\ne0&0\text{ or }p&-1\quad(\sum_{u_0\in U}\mathsf P=0)\\
+ J=S=0&0\text{ or }p&
+ p\,\mathbf1_{B\ne-1}
+ (\mathbf1_{A=B}-\mathbf1_{A=-1})=0\\
+ \end{array}
+ \]
+ Indeed, in the first row the equations $A+Jv=B+Sv$ and $A+Jv=-1$
+ each have one solution, and either both are excluded or neither is.  In the
+ second row the first equation contributes once; if $A=-1$, its excluded
+ contribution is replaced by $-(p-1)=1$.  In the third row the packet is
+ $-1$ whether $A=B$ or not, and the $p$ values of $u_0$ cancel modulo $p$.
+ The fourth row is constant in $v$ and is visibly a multiple of $p$.
+ Consequently, if
+ \[
+  N_{d,u_0;i,j}=\{(r,s):
+  r+(d+pu_0)s=i+(d+pu_0)j\pmod {N_0}\},
+ \]
+ then
+ \[
+  T_d(m)\bmod p=\mathbf1_{J=0}
+  \sum_{u_0\in k}\mathbf1_{N_{d,u_0;i,j}}.
+ \tag{8.15c}
+ \]
+ Thus the ordinary carrier is in the residue-$d$ line bundle, including all
+ seam and wall contributions.
+
+ To retain the information needed after division by $p$, let $L_d(m)$ be the
+ integral $0$--$1$ line sum in (8.15c) and write
+ $T_d=L_d+pR_d$.  With $\rho_p(m)=G^iH^j$, the same four rows before the
+ final reduction give
+ \[
+  T_d(m)-\rho_p(m)T_d(1)\equiv
+  \begin{cases}
+  -\rho_p(m)L_d(1),&J\ne0,\\
+  -p\displaystyle\sum_{u_0\in W_m}
+       \mathbf1_{N_{d,u_0;i,j}},&J=0,
+  \end{cases}
+  \pmod {p^2},
+ \tag{8.15d}
+ \]
+ where $W_m$ consists of the $u_0$ for which the constant source top-block
+ digit is the last block.  For clarity, at the translated point
+ $([r-i]_{N_0},[s-j]_{N_0})$ the seed has point digit $S-J$ and the same
+ tail set $U$.  Canonicalizing that point changes only the constant term of
+ the affine top-block test in $u_0$, not its linear coefficient.  If that
+ coefficient is nonzero, both tests have one solution; if it is zero, each
+ has zero or $p$ solutions.  Their counts therefore agree modulo $p$, and
+ the complete $v$-packet supplies the second factor of $p$ in (8.15d).
+
+ Let
+ $D_{d,c}=z_{\kappa(d)}^{p-c}(v_{\kappa(d)}^p)^c$.  It annihilates every
+ line sum in (8.15c) modulo $p$.  If $\mathcal B_{d,c}$ denotes the resulting
+ line Bockstein, then on a combined first-chart relation
+ \[
+  \lambda_{d,c}=\mathcal B_{d,c}(L_d)+D_{d,c}R_d.
+ \]
+ Put $B^0_{d,c}=\mathcal B_{d,c}(L_d(1))$ and
+ $S_{d,c}=\lambda_{d,c}(1)$.  Applying $D_{d,c}$ to (8.15d), dividing only
+ after the complete relation has been combined, and extending linearly gives
+ \[
+  \lambda_{d,c}(b)-\rho_p(b)S_{d,c}
+  =-\rho_p((1-\Pi_0)b)B^0_{d,c}.
+ \tag{8.15e}
+ \]
+ The exact values of $B^0_{d,c}$ and $S_{d,c}$ are obtained by putting
+$E=G^p$, $T=E-1=x^p$,
+\[
+ S_u(E)=\frac{E^u-1}{E-1},\qquad
+ h(E)=\frac{(E-1)^p-(E^p-1)}p\pmod p.
+\]
+In $k[T]/(T^p)$ one has $h(1+T)=-\log(1+T)$.  For
+$A_n(T)=\sum_{u\in k}E^uS_u(E)^n$, finite-field moments give
+\[
+ hA_n=0\ (0\leq n\leq p-2),\qquad hA_{p-1}=T,
+\]
+and, for $0\leq m\leq p-2$,
+\[
+ hA_{p+m}=\frac{(-1)^m}{m+1}T^{p-1-m}\pmod{T^{p-m}}.
+ \tag{8.16}
+\]
+Indeed, with
+$\phi(w)=\sum_{a=1}^{p-1}\binom waT^{a-1}$,
+$\phi'(w)=-(h/T)(1+T)^w$ and $\phi(w)^p=w^p$ modulo $T^p$; summing
+$-T\phi(u)^n\phi'(u)$ over $u\in k$ leaves only positive exponents
+divisible by $p-1$.  This proves (8.16), and substitution yields (8.13).
+
+Every admissible label in (8.11) satisfies $j+\nu\geq N_0-p$.  Together
+with the displayed degrees of $B^0_{d,c}$, this proves the first equality
+in (8.14) by the nilpotence threshold in
+$k[x,y]/(x^{N_0},y^{N_0})$; the shears below preserve this filtration.
+
+For the Cartier term first take $d=0$ and work in
+\[
+ \mathscr A=k[G,Z]/(G^{N_0}-1,Z^p-1),
+ \qquad E=G^p,\quad T=E-1=x^p,\quad z=Z-1.
+\]
+The root set of
+$Q(U)=\prod_{b\in k}(U-E^b)$ is stable under multiplication by $E$, so
+$Q(EU)=Q(U)$.  If $q_i$ is an intermediate coefficient, then
+$(E^i-1)q_i=0$; because $(E^i-1)/T$ is a unit for $1\leq i<p$, each $q_i$
+is divisible by $T^{p-1}$.  The constant coefficient is $-1$, and
+$Q(1)=0$.  Setting $U=Z$ and using $z^p=0$ therefore gives
+\[
+ \prod_{b\in k}(Z-G^{pb})\in x^{p(p-1)}z\mathscr A.
+\]
+Among $a=0,\ldots,N_0-p$ there remain $(p-1)^2$ indices not divisible by
+$p$, and each corresponding factor $Z-G^a$ lies in $(x,z)$.  A monomial
+surviving their product with the preceding ideal would have the form
+\[
+ x^{p(p-1)+\alpha}z^{1+\gamma},\qquad
+ \alpha\leq p-1,\quad\gamma\leq p-2,\quad
+ \alpha+\gamma\geq(p-1)^2.
+\]
+This is impossible for odd $p$, since $(p-1)^2>2p-3$.  Hence, with
+$j_0=N_0-p+1$,
+\[
+ P_{j_0}(G,Z)=\prod_{a=0}^{N_0-p}(Z-G^a)=0
+ \quad\text{in }\mathscr A,
+ \tag{8.17}
+\]
+and therefore $P_j(G,Z)=0$ for every $j\geq j_0$.
+
+Now $\rho_p(\Pi_0b_{j,\nu})$ is $x^\nu$ times a polynomial in $H^p$.
+After multiplication by a nonzero $B^0_{0,c}$, every positive power of
+$H^p-1=y^p$ exceeds the $y^{N_0-1}$ boundary; only evaluation at $H^p=1$
+can survive.  Its coefficient is the image of $P_j(G,Z)$ modulo $Z^p-1$,
+which vanishes for $j\geq j_0$ by (8.17).  If $j<j_0$, then
+\[
+ \beta_p(j)\leq\beta_p(N_0-p)=2p^2-3p+1,\qquad
+ \nu\geq e-\beta_p(j)\geq(p-1)^3\geq N_0-p;
+\]
+the $x$-power in every nonzero auxiliary seed makes the product zero.
+This proves the second equality of (8.14) for $d=0$.
+
+For general $d$, let
+$\Theta_db(X,Y)=b(X,X^dY)$ and let
+$\Phi_d(r,s)=(r+ds,s)$.  The first map preserves $K_{\mathcal A}$ and
+$\Pi_0\Theta_d=\Theta_d\Pi_0$, while
+\[
+ \rho_p(\Theta_db)=\Phi_d^{-1}(\rho_p(b)),
+ \qquad B^0_{d,c}=\Phi_d(B^0_{0,c}).
+\]
+Conjugating the $d=0$ identity proves (8.14) for every residue.  Substitution
+in the packet defect identity now gives (8.12).
+\end{proof}
+
+\begin{lemma}[Carrier vanishing]
+\label[lemma]{lem:carrier-vanishing}
+For every prime $p\geq5$ and every $d\in k$,
+\[
+ \mathcal H_d(K_{\mathcal A})\subset
+ \mathcal C_{2,\kappa(d)}.
+ \tag{8.18}
+\]
+In particular,
+$\mathcal H_0(K_{\mathcal A})\subset\mathcal C_{2,\infty}$ and
+$\mathcal H_A(K_{\mathcal A})\subset\mathcal C_2$.
+\end{lemma}
+
+\begin{proof}
+For $p\geq5$, every label in (8.11) satisfies the sharper bound
+$j+\nu\geq2p^2-p-1$.  Since the least total degree of a nonzero seed in
+(8.13) is $p$, \cref{lem:seed-annihilation} gives
+$\lambda_{d,c}(b_{j,\nu})=0$ for all $c$.  The mixed differences generate
+$I_{\kappa(d)}$, so the Frobenius pairing in (8.2) identifies their joint
+kernel with $I_{\kappa(d)}^\perp=\mathcal C_{2,\kappa(d)}$.  Linearity on
+the Newton basis proves (8.18).
+\end{proof}
+
+\begin{lemma}[Second-domain cancellation]
+\label[lemma]{lem:second-domain-cancellation}
+In the recursive top-shell bases write
+\[
+ B_3^\transpose=
+ \begin{pmatrix}B_2^\transpose&K\\0&Z\end{pmatrix},
+ \qquad
+ T=\begin{pmatrix}\mathcal A&0\\\mathcal X&pV\end{pmatrix}.
+\]
+For $f\in\mathcal J_2$, put $r_f=K^\transpose f$.  Then
+$T^\transpose r_f$ is divisible by $p$, and, if
+\[
+ s_f=p^{-1}T^\transpose r_f\pmod p=(s_{f,1},s_{f,2})
+\]
+according to the two domain blocks of $T$, one has $s_{f,2}=0$.
+\end{lemma}
+
+\begin{proof}
+For $(a,b)\in k^2$, let $F_{a,b}$ be the indicator of the fibre of
+$G_2\to k^2$ above $(a,b)$ and put
+\[
+ Y_b=\sum_{a\in k}F_{a,b},\qquad
+ \mathsf H_b=Y_b-F_{0,b},\qquad
+ U=\sum_{b\ne0}Y_b.
+\]
+For a fine point $z$ above $(a,b)$, the sum of one line through $z$ in
+each projective direction is $\mathbf1-F_{a,b}$ modulo $p$.  Thus every
+$F_{a,b}$, and hence $Y_b$, $\mathsf H_b$ and $U$, belongs to the
+depth-two line code $\mathcal C_2$.
+
+The coefficient sum for the first domain block is
+\[
+ \overline{KT_1}(X^iY^j)
+ =\mathbf1_{\{\bar j=0\}}U
+  +\mathbf1_{\{\bar i=0\}}\mathsf H_{\bar j}.
+\]
+Pairing with $f\in\mathcal J_2=\mathcal C_2^\perp$ proves the required
+divisibility on that block.  After removing the explicit factor $p$ from
+the second diagonal block, its coordinate indexed by
+$0\leq r<N_0$, $0\leq i<e$ has point kernel
+\[
+ D_{r,i}=\mathbf1_{\{r\equiv0\pmod p\}}\mathsf H_{\bar i}.
+\]
+Indeed the low-digit equation in its defining coefficient packet is
+\[
+ ps(x-r)\equiv i-y\pmod{p^2}.
+\]
+If $x-r$ is a nonunit the packet cancels; if it is a unit there are $p$
+lifts, whose sum is zero unless $r\equiv0\pmod p$, and in the remaining
+case the packet is exactly $\mathsf H_{\bar i}$.  Since this function is
+in $\mathcal C_2$, every such coordinate pairs to zero with $f$.  This
+proves $s_{f,2}=0$ and the lemma.
+\end{proof}
+
+\begin{proposition}[Exact divided-transfer sequence]
+\label[proposition]{prop:divided-transfer-sequence}
+For every prime $p$, let $\pi_*:\A_3\to\A_2$ sum coefficients on point fibres and
+let
+\[
+ \mathscr H_3^{(2)}=
+ \{\widetilde y\in\A_3/p^2\A_3:B_3\widetilde y=0\},
+ \qquad
+ \mathcal J_2:=\mathcal C_2^\perp
+ =\bigcap_{\delta\in\mathbb P^1(k)}I_\delta.
+\]
+Put
+\[
+ S_3=(\LL_3:p),\qquad
+ \overline S_3=(S_3+p\A_3)/p\A_3,
+ \qquad \mathcal Y_3=\overline S_3^\perp.
+\]
+Then
+\[
+ \widetilde{\mathcal C}_3:\mathscr H_3^{(2)}\longrightarrow\mathcal J_2,
+ \qquad \widetilde y\longmapsto p^{-1}\pi_*\widetilde y\pmod p
+\]
+factors through reduction onto $\mathcal Y_3$, and the induced map
+$\mathcal C_3:\mathcal Y_3\to\mathcal J_2$ is the transpose of $\eta_2$
+under the natural finite-field pairings.  If
+$\mathcal X_A=\mathcal X|_{K_{\mathcal A}}$ and
+$\mathcal Q_p:=\coker(\mathcal X_A^\vee)$, there is a canonical map
+\[
+ \Theta:\mathcal J_2\longrightarrow\mathcal Q_p,
+ \qquad f\longmapsto[\Lambda_f],\qquad
+ \Lambda_f(b)=\langle s_{f,1},b\rangle
+ \quad(b\in K_{\mathcal A}),
+\]
+for which
+\[
+ \mathcal Y_3\xrightarrow{\ \mathcal C_3\ }
+ \mathcal J_2\xrightarrow{\ \Theta\ }\mathcal Q_p
+ \quad\text{is exact at }\mathcal J_2.
+\tag{8.19}
+\]
+Furthermore, dualizing the kernel sequence of $\mathcal X_A$ gives
+\[
+ \mathcal Q_p\cong K_{\mathcal A\mathcal X}^\vee,
+ \qquad [\Lambda_f]\longmapsto
+ \Lambda_f|_{K_{\mathcal A\mathcal X}}.
+\tag{8.20}
+\]
+\end{proposition}
+
+\begin{proof}
+The source sequence and its finite-field dual are
+\[
+ 0\longrightarrow\ker\eta_2\longrightarrow\QQ_2/p\QQ_2
+ \xrightarrow{\ \eta_2\ }p\QQ_3/p^2\QQ_3,
+\]
+\[
+ (p\QQ_3/p^2\QQ_3)^\vee\xrightarrow{\ \eta_2^\vee\ }
+ \mathcal J_2\longrightarrow(\ker\eta_2)^\vee\longrightarrow0,
+\tag{8.19a}
+\]
+where $\mathcal J_2\cong(\QQ_2/p\QQ_2)^\vee$.  To realize the first
+dual space, reduction modulo $p$ maps
+$\mathscr H_3^{(2)}$ onto $\mathcal Y_3\cong
+(p\QQ_3/p^2\QQ_3)^\vee$.  Indeed, reduction of a mod-$p^2$ harmonic
+annihilates both $\LL_3/p\LL_3$ and every divided relation.  Conversely,
+if $y\in\mathcal Y_3$, then $B_3y=pu$; orthogonality to the divided
+relations gives $u\in\im\overline B_3$, so a choice of
+$z$ with $\overline B_3z=-u$ makes $y+pz$ harmonic modulo $p^2$.
+
+By \cref{cor:first-transfer-congruence}, for every depth-two point basis
+vector $a$ one may write $\tau_3(a)=B_3^\transpose c+px$.  Adjunction of
+fibre summation and transfer shows that $\pi_*\widetilde y$ is divisible by
+$p$ modulo $p^2$ for $\widetilde y\in\mathscr H_3^{(2)}$.  If two such
+lifts differ by $pz$ with $B_3z=0$ modulo $p$, then
+$\langle\pi_*z,a\rangle=\langle z,\tau_3(a)\rangle=0$ modulo $p$ by the
+same congruence; hence the raw map depends only on the reduction modulo
+$p$.  Pairing $\widetilde{\mathcal C}_3$ with a depth-two line and using
+the depth-transition identity puts its image in
+$\mathcal J_2=\mathcal C_2^\perp$.  Finally,
+\[
+\left\langle\widetilde{\mathcal C}_3(\widetilde y),a\right\rangle
+ =\frac{\langle\widetilde y,\tau_3(a)\rangle}{p}
+ \equiv\langle y,x\rangle\pmod p,
+\]
+which is precisely the dual Bockstein defining $\eta_2^\vee$.
+Consequently $\widetilde{\mathcal C}_3$ factors through reduction onto
+$\mathcal Y_3$, and the induced map $\mathcal C_3$ is the transpose of
+$\eta_2$ in (8.19a).
+
+For exactness, keep the recursive bases of
+\cref{lem:second-domain-cancellation}.  Put
+$R_{\mathrm{top}}=(N+N_0)e$.  The complementary top-shell blocks satisfy
+\[
+ Z^\transpose T^\transpose=T^\transpose Z^\transpose
+ =p^3I_{R_{\mathrm{top}}}
+\]
+(the $n=3$ specialization of the integral dual identity in
+\cite[Theorem~8.3, equation~(26)]{BAB26D2}).  A target
+$f\in\mathcal J_2$ lies in
+$\im\mathcal C_3$ exactly when the prescribed coarse point component
+$pf$ extends to a mod-$p^2$ harmonic.  Transposing the graph form in
+\cref{lem:second-domain-cancellation} gives
+$B_3=\left(\begin{smallmatrix}B_2&0\\K^\transpose&Z^\transpose\end{smallmatrix}\right)$.
+The first block is soluble because $f\in\mathcal J_2$; the top-shell block
+is precisely the requirement that
+\[
+ Z^\transpose v\equiv-pK^\transpose f\pmod{p^2}
+\]
+be solvable.  Put $r_f=K^\transpose f$; replacing $v$ by $-v$ removes
+the harmless sign.  Multiplying by $T^\transpose$,
+one direction gives
+\[
+ T^\transpose r_f\in
+ pT^\transpose\Z_p^{R_{\mathrm{top}}}
+ +p^2\Z_p^{R_{\mathrm{top}}}.
+\tag{8.19b}
+\]
+Conversely, if
+$T^\transpose r_f=pT^\transpose w+p^2v$, multiplication by
+$Z^\transpose$ gives
+$p^3(r_f-pw)=p^2Z^\transpose v$; cancellation in the torsion-free
+$p$-adic lattice yields
+$pr_f=Z^\transpose v+p^2w$.  Hence (8.19b) is equivalent to the original
+congruence, in both directions.
+
+The two-chart reduction is
+\[
+ \overline T=\begin{pmatrix}\mathcal A&0\\\mathcal X&0\end{pmatrix}.
+\]
+By \cref{lem:second-domain-cancellation}, the divided adjoint
+$s_f=(s_{f,1},0)$.  Therefore $s_f\in\im\overline T^\transpose$ exactly
+when $s_{f,1}$ lies in the combined row space of $\mathcal A$ and
+$\mathcal X$.  Restriction to $K_{\mathcal A}$ kills the first-chart row
+space, so the remaining condition is exactly
+$\Lambda_f\in\im\mathcal X_A^\vee$.  For
+$b\in K_{\mathcal A\mathcal X}$, expanding $s_f$ in the fixed cyclotomic
+bases gives the coefficient formula (8.5), hence
+\[
+ \Lambda_f(b)=\langle f,\delta_1(b)\rangle.
+\]
+Thus $\Lambda_f$ is defined on all of $K_{\mathcal A}$ before restriction,
+whereas $\delta_1$ is used only on its typed domain
+$K_{\mathcal A\mathcal X}$; no unnamed section is being used.  This proves
+exactness in (8.19).
+
+Finally, dualizing
+$0\to K_{\mathcal A\mathcal X}\to K_{\mathcal A}
+\xrightarrow{\mathcal X_A}\im\mathcal X_A\to0$
+gives (8.20).  The argument uses only the integral incidence lattices, the
+first transfer congruence, the top-shell dual identity and finite-dimensional
+duality; no Smith multiplicity or conclusion of \cref{thm:main-profile}
+enters.
+\end{proof}
+
+\begin{lemma}[Divided-trace duality]
+\label[lemma]{lem:divided-trace}
+For $p\geq5$, the following are equivalent:
+\[
+ d_p=0;\qquad \delta_1(K_{\mathcal A\mathcal X})=0;\qquad
+ \mathcal H_X(K_{\mathcal A\mathcal X})\subset\mathcal C_2.
+\tag{8.21}
+\]
+\end{lemma}
+
+\begin{proof}
+Since $\mathcal C_3=\eta_2^\vee$, one has $d_p=0$ exactly when
+$\mathcal C_3$ is onto.  Exactness in
+\cref{prop:divided-transfer-sequence} makes this equivalent to
+$[\Lambda_f]=0$ for all $f\in\mathcal J_2$.  Under (8.20), this says
+\[
+ \langle f,\delta_1(b)\rangle=0
+ \quad(f\in\mathcal J_2, b\in K_{\mathcal A\mathcal X}).
+\]
+The perfect pairing
+$\mathcal J_2\times(\mathscr R_2/\mathcal C_2)\to k$ makes this equivalent
+to $\delta_1(K_{\mathcal A\mathcal X})=0$.
+\Cref{lem:carrier-vanishing} gives
+$\mathcal H_A(K_{\mathcal A\mathcal X})\subset\mathcal C_2$, so (8.6)
+gives the final equivalence.
+\end{proof}
+
+\begin{theorem}[Cross-chart divided-carry theorem]
+\label[theorem]{thm:o2}
+For every prime $p$, $d_p=0$; equivalently, (O2) holds.
+\end{theorem}
+
+\begin{proof}
+Let $p\geq5$ and $b\in K_{\mathcal A\mathcal X}$.  By
+\cref{lem:carry-transpose}, $Sb\in K_{\mathcal A}$, and
+\cref{lem:carrier-vanishing} puts $\mathcal H_0(Sb)$ in
+$\mathcal C_{2,\infty}$.  Equations (8.8)--(8.9) therefore give
+$\mathcal H_X(b)\in\mathcal C_{2,0}\subset\mathcal C_2$.
+\Cref{lem:divided-trace} yields $d_p=0$.
+
+The primes $3$ and $2$ are not inferred from this degree bound.  The exact
+$p=3$ double-kernel certificate checks all $360$ zero-cross Newton labels
+(the $18$ candidate columns have rank $18$), hence gives
+$\eps_1(3,3)=18$.  At $p=2$ the semisimple sector and division by two are
+unavailable.  A separate full-matrix certificate constructs $\mathcal A$ and
+$\mathcal AS$ directly and finds ranks $8$ and $9$, so (4.2) gives
+$\eps_1(2,3)=1$ without using a Smith multiplicity.  For both primes, two
+independent Smith lanes give the complete profile; combining those rows with
+the modular-rank values $a_0$ and these independently obtained obstruction
+values in the defect identity gives $d_2=d_3=0$.  The distributed $p=3$
+cross-chart certificate additionally checks the divided-carry membership
+directly; no separate direct O2-membership claim is made for $p=2$.  The
+exact inputs, hashes and non-circular deductions are recorded in
+\cref{app:exceptional-branches}.
+\end{proof}
+
+The proof uses the exchange only in the direction (8.7); it does not claim
+that coordinate swap is an involution on the fixed two-chart splitting.
+Likewise, (8.8) is an identity after compatible candidate relations are
+combined, not a columnwise divided identity.
+
+\section{Exact assembly and the all-prime Smith profile}
+\label{sec:assembly}
+
+Put
+\[
+ N_3=p^6,\qquad
+ \sigma_p=\vp|\QQ_3|=\frac{3p^6-p^5-p^3-p}{2},
+\tag{9.1}
+\]
+and retain $\beta,\gamma$ from (2.5).  By
+\cref{lem:defect,thm:o2},
+\[
+ T_{\geq3}:=m_3+m_4+m_5=a_0+\eps_1(p,3).
+\tag{9.2}
+\]
+The symbol $T_{\geq3}$ is used only for this tail sum; $H_p$ remains the
+boundary-column count from (6.5).
+
+Rank, total size and weighted order give
+\begin{align}
+ m_0&=M_p,\nonumber\\
+ m_1&=2N_3-2M_p+T_{\geq3}+\beta+2\gamma-\sigma_p,\nonumber\\
+ m_2&=\sigma_p-N_3+M_p-2T_{\geq3}-\beta-2\gamma,
+ \tag{9.3}\label{eq:assembly}\\
+ m_3&=T_{\geq3}-\beta-\gamma,\nonumber\\
+ m_4&=\beta,\qquad m_5=\gamma.\nonumber
+\end{align}
+
+\begin{theorem}[All-prime depth-three Smith profile]
+\label[theorem]{thm:main-profile}
+For $p=2$ and $p=3$, respectively,
+\[
+ (m_0,m_1,m_2,m_3,m_4,m_5)=\FCIGDThreeSmithProfileTwo,
+\tag{9.4}
+\]
+\[
+ (m_0,m_1,m_2,m_3,m_4,m_5)=\FCIGDThreeSmithProfileThree.
+\tag{9.5}
+\]
+For every prime $p>3$ with $p\equiv1\pmod6$,
+\[
+\FCIGDThreeSmithProfileModOne
+\tag{9.6}
+\]
+For every prime $p>3$ with $p\equiv5\pmod6$,
+\[
+\FCIGDThreeSmithProfileModFive
+\tag{9.7}
+\]
+Equivalently,
+\[
+ (\QQ_3)_{(p)}\cong
+ \bigoplus_{h=1}^{5}(\Z/p^h\Z)^{m_h}.
+\tag{9.8}
+\]
+\end{theorem}
+
+\begin{proof}
+The transfer theorem gives $m_4,m_5$ and excludes higher exponents.
+\Cref{thm:modrank} gives $m_0$, \cref{prop:a0} gives $a_0$,
+\cref{thm:epsilon} gives $\eps_1$ for odd primes, and the exact exceptional
+certificate gives $\eps_1(2,3)=1$.  By \cref{thm:o2}, the defect term in
+\cref{lem:defect} is zero.  All hypotheses of \eqref{eq:assembly} therefore
+hold for every prime.  Direct substitution gives (9.4)--(9.7).  No value at
+$p=5,7$ or $11$ is used to select either branch.
+\end{proof}
+
+The formulas satisfy identically
+\[
+ \sum_{h=0}^{5}m_h=p^6,
+ \qquad
+ \sum_{h=1}^{5}hm_h=\frac{3p^6-p^5-p^3-p}{2}.
+\tag{9.9}
+\]
+After substituting $p=6h+1$ in (9.6), every multiplicity expands as a
+polynomial in $\Z_{\geq0}[h]$; for example
+\[
+ m_2=3h(4h+1)(6h+1)
+ (216h^3+102h^2+25h+2),
+\]
+and the same direct expansion of (9.7) after $p=6h+5$ lies in
+$\Z_{\geq0}[h]$ for all six multiplicities.  The public companion performs
+both substitutions with exact rational arithmetic and rejects a nonintegral
+or negative coefficient.  Thus integrality and positivity do not rely on a
+bounded prime sweep.
+
+\section{Finite controls, source boundary, and limitations}
+\label{sec:controls}
+
+The first profile rows are
+\[
+\begin{array}{c|rrrrrr}
+p&m_0&m_1&m_2&m_3&m_4&m_5\\ \hline
+2&30&6&19&6&2&1\\
+3&240&168&195&108&15&3\\
+5&4050&4140&4795&2490&140&10\\
+7&26740&34608&36225&19488&567&21\\
+11&363000&545622&561979&297330&3575&55
+\end{array}
+\tag{10.1}
+\]
+The $p=2,3$ rows are reconstructed independently by the public exceptional
+packages and also agree with the assembled formulas.  The $p=5,7,11$ rows
+are direct exact evaluations of (9.6)--(9.7) and of the tracked structured
+formula object.  All five rows are public regression controls; none is an
+input used to select a residue-class branch.
+
+The active common-image thresholds at the three hostile odd-prime controls
+are
+\[
+\begin{array}{c|l}
+p&\{\tau_p(K)<e\}\\ \hline
+3&9,12,15\\
+5&45,50,55,60,64,88,92,96\\
+7&114,120,126,133,140,147,154,203,210,216,222,228,234,240,288.
+\end{array}
+\tag{10.2}
+\]
+At $p=5$, the threshold $64$ is a required pattern break: any rule that
+predicts only an arithmetic progression fails there.
+
+The bounded literature record is not novelty clearance.  Molchanov treats
+the affine residue-ring Radon transform, its normal operator, spectrum and
+inversion \cite{MOL12}; Ilmavirta gives the finite-group transform context
+\cite{ILM}.  Adjacent projective Hjelmslev rank and lifting results are due
+to Landjev--Vandendriessche, Kohnert and Hanssens--Van Maldeghem
+\cite{LV14,KOH09,HVM89}.  \L aba--Trainor and Dvir study the modular
+hyperplane-function object and rank bounds \cite{LT25,DVI26}, not the
+integral affine Smith profile here.  Two additional projective-rank sources
+were available only at metadata or abstract level \cite{LAN17,BLR23}; no
+theorem is transferred from them.
+
+The present proof is depth-specific.  It does not prove a standard-basis or
+Rees strictness theorem in general, an all-depth recurrence for closed Smith
+profiles, or a complexity improvement for the full incidence matrix.  The
+Newton-minors argument succeeds because it computes the actual truncated
+image directly; it does not justify the false identity
+$\operatorname{in}(U\cap V)=\operatorname{in}(U)\cap
+\operatorname{in}(V)$ in arbitrary filtered modules.
+
+\section{Public reproducibility
+\texorpdfstring{\protect\\}{ }and companion interface}
+\label{sec:repro}
+
+The public repository contains the cited-only manuscript source, the
+structured formula object from which the displayed branches are generated,
+an exact-arithmetic companion, bounded certificates for the exceptional
+primes, hostile tests, and fail-closed source and release manifests.  The
+one-command verifier checks:
+\begin{enumerate}
+\item the literal formulas (7.2), (7.7), and (9.4)--(9.7);
+\item both polynomial branches of (9.9), integrality substitutions and the
+  finite rows (10.1);
+\item the typed distinction among vector $G_K$, boundary count $H_p$,
+  generator invariant $\ngen_{\overline\OO}(W)$ and tail sum
+  $T_{\geq3}$;
+\item the symbolic rank and weighted-order identities for both residue
+  classes modulo $6$, together with independent numerical controls;
+\item the exact $p=2$ two-chart rank gap $9-8=1$ and its restriction to
+  the $24$-dimensional first-chart kernel;
+\item source-manifest, PDF, current-checkout and release-surface integrity.
+\end{enumerate}
+
+The layout follows the Depth-2 companion \cite{BAB26D2}:
+\texttt{paper/} contains the source, generated formula fragment and
+title-named PDF; \texttt{companion/} contains the structured formulas and
+exact arithmetic; \texttt{tests/} contains mutation-sensitive controls;
+\texttt{scripts/} supplies the verifier; and \texttt{docs/} states source,
+claim and reproducibility boundaries.  Reproduction commands and the
+hash-locked dependency environment are documented in
+\texttt{REPRODUCE.md}.  Finite replay is a supporting check and is not
+used as a proof of the all-prime theorem.
+
+\appendix
+
+\section{Typed symbol contract}
+\label{app:symbols}
+
+The following roles are normative:
+\[
+\begin{array}{c|l}
+N=p^3,\ N_0=p^2&\text{depth-three and coarse residue moduli}\\
+E_{\mathcal A},E_{\mathcal X}&\text{first-chart and cross-chart targets}\\
+\mathfrak q&\text{formal Gaussian-polynomial indeterminate}\\
+G_K&\text{boundary vector in }\overline\OO^{p^2}\\
+H_p&\text{number of admitted boundary columns}\\
+\tau_p(K)&\text{DVR Smith threshold}\\
+\ngen_{\overline\OO}(W)&\text{minimal number of module generators}\\
+T_{\geq3}&m_3+m_4+m_5\\
+\mathcal H_d,\mathcal H_X&\text{first-chart residue and cross divided carries}\\
+\mathcal C_{2,\delta}&\text{depth-two tangent-bundle line code}.
+\end{array}
+\]
+In particular, no scalar $G_p$ is defined, and the auxiliary letter $H$ is
+not used for the Smith tail.
+
+\section{Residue-block arithmetic for the closed sum}
+\label{app:arithmetic-blocks}
+
+This appendix supplies the complete block decomposition used in
+\cref{lem:tail-endpoints}.  If $M=ap+b$ with $0\leq b<p$, then
+\[
+ \sum_{K=0}^{M-1}\left\lfloor\frac Kp\right\rfloor
+ =p\frac{a(a-1)}2+ab.
+\tag{A.1}
+\]
+For $p=6h+1$ one has
+\[
+ M=2hp+h=h(2p-1)+2h,\qquad c=4h.
+\]
+Thus (A.1), with $(a,b)=(2h,h)$, gives the first floor sum.  For the
+shifted denominator $d=2p-1=12h+1$, the interval
+\[
+ c\leq K+c\leq c+M-1=hd+6h-1
+\]
+has an initial block of length $d-c=8h+1$, $h-1$ complete intermediate
+blocks, and a terminal block of length $6h$.  Hence
+\[
+ \sum_{K=0}^{M-1}\left\lfloor\frac{K+c}{d}\right\rfloor
+ =d\sum_{j=1}^{h-1}j+6h^2
+ =d\frac{h(h-1)}2+6h^2.
+\tag{A.2}
+\]
+The ramp in a complete $d$-block is
+\[
+ \sum_{r=p}^{d-1}(r-(p-1))=\frac{p(p-1)}2
+ =3h(6h+1).
+\]
+It occurs in the initial block and the $h-1$ complete blocks, but not in
+the terminal block, giving $\sum\delta_K=3h^2p$.
+
+For $p=6h+5$,
+\[
+ M=(2h+1)p+4h+3,\qquad d=12h+9,\qquad c=7h+5.
+\]
+Equation (A.1) with $(a,b)=(2h+1,4h+3)$ gives the first floor sum.  Now
+\[
+ c+M-1=(h+1)d+6h+3.
+\]
+There is an initial block of length $d-c=5h+4$, followed by $h$ complete
+blocks and a terminal block of length $6h+4=p-1$.  Consequently
+\[
+ \sum_{K=0}^{M-1}\left\lfloor\frac{K+c}{d}\right\rfloor
+ =d\frac{h(h+1)}2+(h+1)(p-1).
+\tag{A.3}
+\]
+The initial ramp omits the values $1,\ldots,h$, each complete block
+contributes $p(p-1)/2$, and the terminal ramp is zero.  Therefore
+\[
+ \sum_{K=0}^{M-1}\delta_K
+ =(h+1)\frac{p(p-1)}2-\frac{h(h+1)}2,
+\tag{A.4}
+\]
+which is the last entry of (7.9).  These decompositions also give
+$L_{M-1}=p-1$ and $L_M=0$ directly.
+
+\section{Exceptional branches and executable certificates}
+\label{app:exceptional-branches}
+
+The primes $2$ and $3$ are separate proofs, not data used to fit the
+odd-prime formulas.  The executable package is
+\begin{center}
+\path{companion/exceptional_profiles/}.
+\end{center}
+It constructs the canonical point-by-line transpose $B_3^\transpose$ and
+computes its local Smith valuations by two independent exact lanes:
+
+\begin{enumerate}
+\item minimum-valuation pivot elimination over $\Z/p^7\Z$;
+\item Bockstein layer peeling.
+\end{enumerate}
+
+Both lanes return
+\[
+ \begin{array}{c|c|c|c}
+p&\operatorname{shape}(B_3^\transpose)&(m_0,\ldots,m_5)&
+ \sum_{h=1}^{5}h\,m_h\\ \hline
+ 2&64\times96&\FCIGDThreeSmithProfileTwo&75\\
+ 3&729\times972&\FCIGDThreeSmithProfileThree&957.
+ \end{array}
+\tag{B.1}
+\]
+The matrix SHA-256 values are respectively
+\[
+ \begin{split}
+ &\texttt{CAD9CC122B4811426CE958D1EA9487C536BF51FEACD3550FA04A94A012EB5E82},\\
+ &\texttt{3D05CC493F837A76693934970005F025F3CC37C70DCECDD659295A37BC23CC68}.
+ \end{split}
+\]
+The canonical result and verifier source are authenticated by the public
+source manifest; normal and optimized executions reproduce the same result
+bytes.
+
+The same directory contains a separate first-transfer certificate.  At
+$p=2$ and $p=3$ it solves exactly for one coarse point-fibre indicator in
+the modular depth-three line code, checks the solution residual, and then
+independently pairs the indicator with a basis of the full dual nullspace.
+The matrix ranks are $30$ and $240$, the nullities are $34$ and $489$, and
+the displayed primal certificates use $14$ and $147$ lines, respectively.
+Deleted-line and flipped-point mutations are rejected.  Affine translation
+therefore proves the first-transfer congruence for every point fibre at the
+two exceptional primes.
+
+The independent package
+\begin{center}
+\path{companion/epsilon1_p2/}
+\end{center}
+certifies the obstruction in (4.2) at $p=2$ without reading (B.1).  In the
+power basis of $\F_2[Z]/(Z^4+1)$, its $32$ columns are indexed by
+$X^iY^j$, $0\leq i<4$, $0\leq j<8$, and its rows by
+$(t,b)$, $0\leq t<8$, $0\leq b<4$.  It constructs
+\[
+ \mathcal A_{(t,b),(i,j)}=[Z^b]Z^{i+tj},\qquad
+ (\mathcal AS)_{(t,b),(i,j)}=[Z^b]Z^{ti+j}.
+\tag{B.2}
+\]
+Two independent exact rank algorithms give
+\[
+ \rank_{\F_2}\mathcal A=8,\qquad
+ \rank_{\F_2}\begin{bmatrix}\mathcal A\\ \mathcal AS\end{bmatrix}=9,
+ \qquad \dim_{\F_2}K_{\mathcal A}=24.
+\tag{B.3}
+\]
+Direct restriction gives
+$\rank((\mathcal AS)|_{K_{\mathcal A}})=1$; unit-slope rows contribute
+rank zero on the kernel, while nonunit-slope rows already contribute rank
+one.  The certificate also records an invertible $9\times9$ witness minor
+and checks every cyclotomic remainder by both a closed formula and polynomial
+long division.  Thus (4.2) yields $\eps_1(2,3)=1$ independently of the Smith
+row.
+
+There is no circular use of \cref{thm:main-profile}: (B.1) is obtained
+directly from the incidence matrix.  In the defect identity (8.1), the tails
+from (B.1) are
+\[
+ 6+2+1=9=8+\eps_1(2,3),\qquad
+ 108+15+3=126=108+\eps_1(3,3),
+\]
+where the independently certified obstruction values are $1$ from
+(B.2)--(B.3) and $18$ from the $p=3$ cross-chart rank.
+Thus the direct rows imply $d_2=d_3=0$.  For $p=3$ the cross-chart package
+in \path{companion/cross_chart_p3/} reconstructs all $378$ Newton labels,
+classifies $360$ individually zero cross-chart labels, proves that the
+remaining $162\times18$ matrix has rank $18$, and checks every divided
+carry against both the correct line-row space and its annihilator
+differences.  This is an additional local check, not the source of (B.1).
+
+From the repository root, the replay commands are to be run sequentially:
+\begin{verbatim}
+python companion/exceptional_profiles/verify_exceptional_profiles.py
+python -O companion/exceptional_profiles/verify_exceptional_profiles.py
+python companion/exceptional_profiles/verify_o1_exceptional.py
+python -O companion/exceptional_profiles/verify_o1_exceptional.py
+python companion/cross_chart_p3/verify_cross_chart_p3.py
+python -O companion/cross_chart_p3/verify_cross_chart_p3.py
+python companion/epsilon1_p2/verify_epsilon1_p2.py
+python -O companion/epsilon1_p2/verify_epsilon1_p2.py
+\end{verbatim}
+Each verifier is read-only and authenticates its result and execution
+receipt.  No exceptional computation is extrapolated to another prime.
+
+\printbibliography
+
+\end{document}

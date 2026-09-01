@@ -1,0 +1,139 @@
+{
+  "acceptance": {
+    "all_first_chart_zero": true,
+    "candidate_count_18": true,
+    "candidate_rank_18": true,
+    "cross_support_predicate_exact": true,
+    "cross_zero_count_360": true,
+    "dual_membership_oracles_agree": true,
+    "label_count_378": true,
+    "transpose_hostile_rejected": true
+  },
+  "candidate_matrix": {
+    "labels": [
+      [
+        9,
+        0
+      ],
+      [
+        9,
+        1
+      ],
+      [
+        9,
+        2
+      ],
+      [
+        10,
+        0
+      ],
+      [
+        10,
+        1
+      ],
+      [
+        10,
+        2
+      ],
+      [
+        11,
+        0
+      ],
+      [
+        11,
+        1
+      ],
+      [
+        11,
+        2
+      ],
+      [
+        12,
+        0
+      ],
+      [
+        12,
+        1
+      ],
+      [
+        13,
+        0
+      ],
+      [
+        13,
+        1
+      ],
+      [
+        14,
+        0
+      ],
+      [
+        14,
+        1
+      ],
+      [
+        15,
+        0
+      ],
+      [
+        16,
+        0
+      ],
+      [
+        17,
+        0
+      ]
+    ],
+    "matrix_sha256": "63396DE90FE22AD612E8797608FC89217B4143E6E9647FFAEBB2ECDCCD0270AB",
+    "pivot_columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "rank": 18,
+    "rref_sha256": "5D109DAABA8D371D08664C503583A9DA513E4532B5E62F76BB95A40DB245E237",
+    "shape": [
+      162,
+      18
+    ]
+  },
+  "divided_cross_carry": {
+    "annihilator_membership_count": 360,
+    "case_count": 360,
+    "membership_digest": "420B82C361E16F5581DB3BE3818C3C74025D5E7CDFA007B783EA779440B165B5",
+    "row_space_membership_count": 360,
+    "target_bundle": "normals (3a,1), a in F_3, constants modulo 9",
+    "transpose_hostile_rejection_count": 15
+  },
+  "labels": {
+    "candidate_count": 18,
+    "digest": "DD300709132DF83091C71B56D78AB5347BF44328E3DDB0800EAE8ADC5CA9512B",
+    "first_chart_zero_count": 378,
+    "total": 378,
+    "zero_cross_count": 360
+  },
+  "parameters": {
+    "e": 18,
+    "p": 3,
+    "q": 27,
+    "q0": 9
+  },
+  "role": "bounded p=3 cross-chart and divided-carry check; no prime interpolation",
+  "schema": "fcig.depth3.cross-chart-p3-result.v1",
+  "status": "PASS"
+}

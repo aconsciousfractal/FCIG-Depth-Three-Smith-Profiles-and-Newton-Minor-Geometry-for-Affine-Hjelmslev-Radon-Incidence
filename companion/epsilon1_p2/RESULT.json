@@ -1,0 +1,116 @@
+{
+  "acceptance": {
+    "cyclotomic_oracles_agree": true,
+    "first_chart_rank_8": true,
+    "independent_rank_lanes_agree": true,
+    "kernel_dimension_24": true,
+    "nonunit_rows_capture_increment": true,
+    "rank_difference_1": true,
+    "restriction_identity": true,
+    "two_chart_rank_9": true,
+    "unit_rows_add_no_rank": true,
+    "witness_minor_is_invertible": true
+  },
+  "definition": "epsilon_1(2,3)=rank_F2([A;AS])-rank_F2(A)",
+  "epsilon_1": 1,
+  "matrices": {
+    "A": {
+      "formula": "[Z^b] Z^(i+t*j)",
+      "sha256": "466302455616DC786B76A8122937EBA4C3F356660322BC97D70F72FF380E0F05",
+      "shape": [
+        32,
+        32
+      ]
+    },
+    "AS": {
+      "formula": "[Z^b] Z^(t*i+j)",
+      "sha256": "F0A38398F44F80260A4BA6A6808D4DCF52CB1544922E577D188B67EF7423F0F7",
+      "shape": [
+        32,
+        32
+      ]
+    },
+    "nonunit_AS_rows": {
+      "sha256": "721CEEB2D282D6D4F56CA5E814682365433CDFD5BF13BC14BD0226B3DCEDE34B",
+      "shape": [
+        16,
+        32
+      ]
+    },
+    "stacked": {
+      "sha256": "EA9CB8093FB0A023E2EB089B3CF44B996F38572CB825A2E5F3D9F403DC2E2254",
+      "shape": [
+        64,
+        32
+      ]
+    }
+  },
+  "parameters": {
+    "cyclotomic_relation": "Phi_8(Z)=Z^4+1",
+    "e": 4,
+    "n": 3,
+    "p": 2,
+    "q": 8,
+    "q0": 4,
+    "source_dimension": 32
+  },
+  "rank_lanes": {
+    "bitset": {
+      "first_chart": 8,
+      "first_transcript_sha256": "BD6C82AF6923E318192735BB5C762052F73AFAB3EF0D29EF12B0F912B3CE811F",
+      "two_chart": 9,
+      "two_chart_transcript_sha256": "B837B6DBF3B9C01FEC73D0925A016272A38BC26CB219FEAC2219F74A6DD01D64"
+    },
+    "rref": {
+      "first_chart": 8,
+      "first_plus_nonunit_rows": 9,
+      "first_plus_unit_rows": 8,
+      "swapped_chart": 8,
+      "two_chart": 9
+    }
+  },
+  "remainder_oracles": {
+    "exponents_checked": 47,
+    "maximum_exponent": 52,
+    "sha256": "97B45AA2EDC3B1EE859EA0492E6143783B514E8702D3FFDF5476CA68B59F737D"
+  },
+  "restriction_to_kernel": {
+    "kernel_basis_sha256": "891B32F9A9B9428B834A3B20DC26582699A0059A5DFA875B98B110C1C5993D6C",
+    "kernel_dimension": 24,
+    "ranks": {
+      "AS_on_kernel_A": 1,
+      "nonunit_AS_on_kernel_A": 1,
+      "unit_AS_on_kernel_A": 0
+    },
+    "restricted_matrix_sha256": "157970045E297B816F60119B4B3C6B6E54BB4E0DF095DE7E34CBE4106DD3CE0C"
+  },
+  "role": "bounded exact p=2 obstruction certificate; no prime interpolation",
+  "schema": "fcig.depth3.epsilon1-p2-result.v1",
+  "status": "PASS",
+  "witness": {
+    "cross_row_index": 0,
+    "first_chart_row_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+    ],
+    "minor_rank": 9,
+    "minor_sha256": "FF77A3C26E6EC78089373E70FA023B2B85B9933432FA4B71700FE7F5166DA97B",
+    "pivot_columns": [
+      0,
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      16,
+      24
+    ]
+  }
+}

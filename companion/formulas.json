@@ -1,0 +1,226 @@
+{
+  "authority": {
+    "proof_source": "paper/main.tex",
+    "scope": "structured rendering and exact-arithmetic verification; the written proof is authoritative"
+  },
+  "epsilon_1": {
+    "branches": {
+      "mod6_1": {
+        "condition": {
+          "minimum_prime": 5,
+          "modulus": 6,
+          "residue": 1
+        },
+        "expression": {
+          "denominator": 36,
+          "factors": [
+            {
+              "coefficients": [-1, 1],
+              "power": 2
+            },
+            {
+              "coefficients": [4, 2, 5, 4],
+              "power": 1
+            }
+          ]
+        }
+      },
+      "mod6_5": {
+        "condition": {
+          "minimum_prime": 5,
+          "modulus": 6,
+          "residue": 5
+        },
+        "expression": {
+          "denominator": 72,
+          "factors": [
+            {
+              "coefficients": [0, 1],
+              "power": 1
+            },
+            {
+              "coefficients": [1, 1],
+              "power": 1
+            },
+            {
+              "coefficients": [-5, 11, -18, 8],
+              "power": 1
+            }
+          ]
+        }
+      }
+    },
+    "exceptional": {
+      "2": 1,
+      "3": 18
+    },
+    "symbol": "epsilon_1(p,3)"
+  },
+  "representation": {
+    "coefficient_order": "ascending powers of p",
+    "expression": "product of polynomial factors divided by a positive integer denominator",
+    "variable": "p"
+  },
+  "schema": "fcig.depth3.formulas.v1",
+  "smith_profile": {
+    "branches": {
+      "mod6_1": {
+        "condition": {
+          "minimum_prime": 5,
+          "modulus": 6,
+          "residue": 1
+        },
+        "multiplicities": [
+          {
+            "expression": {
+              "denominator": 18,
+              "factors": [
+                {"coefficients": [0, 1], "power": 1},
+                {"coefficients": [1, 1], "power": 1},
+                {"coefficients": [-1, 3, 0, 4, 3], "power": 1}
+              ]
+            },
+            "symbol": "m_0"
+          },
+          {
+            "expression": {
+              "denominator": 18,
+              "factors": [
+                {"coefficients": [0, 1], "power": 1},
+                {"coefficients": [-1, 1], "power": 2},
+                {"coefficients": [1, 1], "power": 1},
+                {"coefficients": [1, 2, 6], "power": 1}
+              ]
+            },
+            "symbol": "m_1"
+          },
+          {
+            "expression": {
+              "denominator": 36,
+              "factors": [
+                {"coefficients": [0, 1], "power": 1},
+                {"coefficients": [-1, 1], "power": 1},
+                {"coefficients": [1, 2], "power": 1},
+                {"coefficients": [-2, 9, -1, 6], "power": 1}
+              ]
+            },
+            "symbol": "m_2"
+          },
+          {
+            "expression": {
+              "denominator": 18,
+              "factors": [
+                {"coefficients": [0, 1], "power": 1},
+                {"coefficients": [-1, 1], "power": 2},
+                {"coefficients": [1, 1], "power": 1},
+                {"coefficients": [-1, 4, 3], "power": 1}
+              ]
+            },
+            "symbol": "m_3"
+          },
+          {
+            "expression": {
+              "denominator": 4,
+              "factors": [
+                {"coefficients": [0, 1], "power": 1},
+                {"coefficients": [-1, 1], "power": 2},
+                {"coefficients": [2, 1], "power": 1}
+              ]
+            },
+            "symbol": "m_4"
+          },
+          {
+            "expression": {
+              "denominator": 2,
+              "factors": [
+                {"coefficients": [0, 1], "power": 1},
+                {"coefficients": [-1, 1], "power": 1}
+              ]
+            },
+            "symbol": "m_5"
+          }
+        ]
+      },
+      "mod6_5": {
+        "condition": {
+          "minimum_prime": 5,
+          "modulus": 6,
+          "residue": 5
+        },
+        "multiplicities": [
+          {
+            "expression": {
+              "denominator": 18,
+              "factors": [
+                {"coefficients": [0, 1], "power": 2},
+                {"coefficients": [1, 1], "power": 2},
+                {"coefficients": [1, 1, 3], "power": 1}
+              ]
+            },
+            "symbol": "m_0"
+          },
+          {
+            "expression": {
+              "denominator": 36,
+              "factors": [
+                {"coefficients": [0, 1], "power": 1},
+                {"coefficients": [1, 1], "power": 1},
+                {"coefficients": [-1, 2], "power": 1},
+                {"coefficients": [2, -5, -7, 6], "power": 1}
+              ]
+            },
+            "symbol": "m_1"
+          },
+          {
+            "expression": {
+              "denominator": 36,
+              "factors": [
+                {"coefficients": [0, 1], "power": 1},
+                {"coefficients": [4, -11, -12, 19, -8, 12], "power": 1}
+              ]
+            },
+            "symbol": "m_2"
+          },
+          {
+            "expression": {
+              "denominator": 36,
+              "factors": [
+                {"coefficients": [0, 1], "power": 1},
+                {"coefficients": [-1, 1], "power": 1},
+                {"coefficients": [1, 1], "power": 1},
+                {"coefficients": [2, -11, 2, 6], "power": 1}
+              ]
+            },
+            "symbol": "m_3"
+          },
+          {
+            "expression": {
+              "denominator": 4,
+              "factors": [
+                {"coefficients": [0, 1], "power": 1},
+                {"coefficients": [-1, 1], "power": 2},
+                {"coefficients": [2, 1], "power": 1}
+              ]
+            },
+            "symbol": "m_4"
+          },
+          {
+            "expression": {
+              "denominator": 2,
+              "factors": [
+                {"coefficients": [0, 1], "power": 1},
+                {"coefficients": [-1, 1], "power": 1}
+              ]
+            },
+            "symbol": "m_5"
+          }
+        ]
+      }
+    },
+    "exceptional": {
+      "2": [30, 6, 19, 6, 2, 1],
+      "3": [240, 168, 195, 108, 15, 3]
+    },
+    "symbols": ["m_0", "m_1", "m_2", "m_3", "m_4", "m_5"]
+  }
+}

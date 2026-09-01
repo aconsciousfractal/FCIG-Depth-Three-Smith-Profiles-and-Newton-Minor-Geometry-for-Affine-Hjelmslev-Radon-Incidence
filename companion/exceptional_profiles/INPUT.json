@@ -1,0 +1,20 @@
+{
+  "algorithms": [
+    "local_smith_minpivot",
+    "bockstein_layer_peeling"
+  ],
+  "cases": [
+    {
+      "cutoff": 7,
+      "depth": 3,
+      "prime": 2
+    },
+    {
+      "cutoff": 7,
+      "depth": 3,
+      "prime": 3
+    }
+  ],
+  "matrix_convention": "point rows, affine-line columns, canonical two-chart order",
+  "schema": "fcig.depth3.exceptional-input.v1"
+}

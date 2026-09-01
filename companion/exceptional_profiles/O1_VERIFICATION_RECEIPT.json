@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "O1_RESULT.json": {
+      "bytes": 3350,
+      "sha256": "B827876683B9E5715AB28E9CBDEDBB63CC3B570545686F3C8F19BD5C67B47E5E"
+    },
+    "depth3_smith.py": {
+      "bytes": 16094,
+      "sha256": "C1761F3AD2431291FF877BFF999A331756EE865780D35AEFF24CA3DAC3B3AC9E"
+    },
+    "o1_exceptional_certificate.py": {
+      "bytes": 8320,
+      "sha256": "AF27AC7B68F5CE16504AB9CB06A386745060300B48FF0B6733CE57F968EA03CF"
+    },
+    "verify_o1_exceptional.py": {
+      "bytes": 2267,
+      "sha256": "64183A383747280B26A260990CFACAB5E0584186CC795082E5E99E2BBD93285A"
+    }
+  },
+  "executions": {
+    "normal": {
+      "command": "python -I -B o1_exceptional_certificate.py",
+      "result_sha256": "B827876683B9E5715AB28E9CBDEDBB63CC3B570545686F3C8F19BD5C67B47E5E"
+    },
+    "optimized": {
+      "command": "python -I -B -O o1_exceptional_certificate.py",
+      "result_sha256": "B827876683B9E5715AB28E9CBDEDBB63CC3B570545686F3C8F19BD5C67B47E5E"
+    }
+  },
+  "python": "3.14.6",
+  "schema": "fcig.depth3.o1-exceptional-receipt.v1",
+  "status": "PASS"
+}

@@ -1,0 +1,95 @@
+{
+  "cases": {
+    "2": {
+      "dual_lane": {
+        "basis_sha256": "ED38038A6C2E3362AB17BDDF0D9BEE2B3D8288D3238D6A153CD7E981CDC101D7",
+        "nonzero_pairings": 0,
+        "nullity": 34,
+        "pairing_sha256": "88191420562C56338693BFD977C6AA367F22527FD4793DA00A3E26211E5B208B",
+        "rank": 30,
+        "rref_sha256": "9643273B7D7A120E63AD4D29877EFE35C734912219B91CDCBFED189B32E08F8F"
+      },
+      "hostile_mutations": {
+        "deleted_line": {
+          "column": 4,
+          "residual_hamming_weight": 8,
+          "residual_sha256": "4F2F0A18C4B5CBE29F3A481E7F3BD8AE814D8A9776E8DE4629B61705EF21D1B1"
+        },
+        "flipped_point": {
+          "nonzero_dual_pairings": 11,
+          "pairing_sha256": "40F846CD201640D560E661BDD7F6AA504392B5C827903691AAE792B1FE854931",
+          "point": 1
+        }
+      },
+      "matrix": {
+        "rank": 30,
+        "sha256": "97789A6C05E70CCC48063C3D44A820ADE1C40C411C4DFA64B57F35FDEC9F5679",
+        "shape": [
+          64,
+          96
+        ]
+      },
+      "primal_lane": {
+        "augmented_rref_sha256": "9E87C2E1605482DA94E14EAA2182821A034E8B2416CB267D48F5C3986167AA87",
+        "rank": 30,
+        "residual_hamming_weight": 0,
+        "solution_sha256": "9FAFFA99C1F4960A64B072513EE04B327E8B58E804796824ADD21C57C857BFF9",
+        "support_size": 14
+      },
+      "prime": 2,
+      "status": "PASS",
+      "target": {
+        "point_count": 4,
+        "sha256": "EDE82C4F0A1462F065E3F3BFBD82D901D466CDD7D2DEEDB7D9EA22E366ED29A0"
+      }
+    },
+    "3": {
+      "dual_lane": {
+        "basis_sha256": "84CB201CE758BD8C23E0E75FBE8FD0FCD563C8C74EA7443F50200EBC8B777B58",
+        "nonzero_pairings": 0,
+        "nullity": 489,
+        "pairing_sha256": "51A69C1D3DB710800EE0D08A85FDD890D7C249E483BB795FDF8BE1C5E8E74CF6",
+        "rank": 240,
+        "rref_sha256": "E3107729D7CD55FAAE5C7B172D7164E7BC64DE8B9C295B2A8459109D48C71640"
+      },
+      "hostile_mutations": {
+        "deleted_line": {
+          "column": 2,
+          "residual_hamming_weight": 27,
+          "residual_sha256": "9BC67933B86B17B8CE99D22B18F7DB1005F51CDD0D630E72060F09B0F68B3705"
+        },
+        "flipped_point": {
+          "nonzero_dual_pairings": 339,
+          "pairing_sha256": "E7096AE7326CA386C0A4A436168A402368624C28AE3A142EFB4B17D03E1628BF",
+          "point": 1
+        }
+      },
+      "matrix": {
+        "rank": 240,
+        "sha256": "26A9AD6E43231A3D3F40098796D21B330089F167FAFB6B9ABA4395D458A0C89C",
+        "shape": [
+          729,
+          972
+        ]
+      },
+      "primal_lane": {
+        "augmented_rref_sha256": "5FFEB688B533D1173901EF73EF6DCB3FE4E71391D70101C0634FB6914B6E2FAD",
+        "rank": 240,
+        "residual_hamming_weight": 0,
+        "solution_sha256": "04B257BC08B110EE1666D648E93C5AF52285991D0B62C129DC19123D095FEB03",
+        "support_size": 147
+      },
+      "prime": 3,
+      "status": "PASS",
+      "target": {
+        "point_count": 9,
+        "sha256": "21E068EA78345DA07DAAD9E89C9E6C54B24733AD7DA7264CAA6794DBBE183808"
+      }
+    }
+  },
+  "claim": "one point-fibre indicator belongs to the depth-three modular line code",
+  "schema": "fcig.depth3.o1-exceptional-result.v1",
+  "scope": "exact exceptional first-transfer congruence for p=2,3 only",
+  "status": "PASS",
+  "translation": "all point fibres follow from affine translation invariance"
+}

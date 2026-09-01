@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 860,
+      "sha256": "F64986D059904C76501678FFCD4B5641DF7D52C6CA52CFB663B7659423CDED10"
+    },
+    "RESULT.json": {
+      "bytes": 2273,
+      "sha256": "F3187578EA2EA8C3B1379697F0424E82A35E0CBAA576D0E43F1B22AA674842D6"
+    },
+    "cross_chart_certificate.py": {
+      "bytes": 12304,
+      "sha256": "3D712F400F08456280E743178A217273E839F0F69AE98AB02E679DB80CF5082A"
+    },
+    "verify_cross_chart_p3.py": {
+      "bytes": 2244,
+      "sha256": "D8198649CBFFFE43BBF82A6A04B5DF0D4136B9DAEFBE965E32021A89121EC7D6"
+    }
+  },
+  "executions": {
+    "normal": {
+      "command": "python -I -B cross_chart_certificate.py",
+      "result_sha256": "F3187578EA2EA8C3B1379697F0424E82A35E0CBAA576D0E43F1B22AA674842D6"
+    },
+    "optimized": {
+      "command": "python -I -B -O cross_chart_certificate.py",
+      "result_sha256": "F3187578EA2EA8C3B1379697F0424E82A35E0CBAA576D0E43F1B22AA674842D6"
+    }
+  },
+  "python": "3.14.6",
+  "schema": "fcig.depth3.cross-chart-p3-receipt.v1",
+  "status": "PASS"
+}

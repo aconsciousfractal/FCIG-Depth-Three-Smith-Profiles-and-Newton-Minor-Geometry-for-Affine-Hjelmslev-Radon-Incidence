@@ -1,0 +1,34 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 1279,
+      "sha256": "662927778585246E1585DFF716829FB2609AF6A25C8DC1DA1AADF4AFB58ADA8B"
+    },
+    "RESULT.json": {
+      "bytes": 2855,
+      "sha256": "D97727F7706C35F4674B98CB9C9208F5FBCBFA33FED8A51133AD9F360202B037"
+    },
+    "epsilon1_p2_certificate.py": {
+      "bytes": 12667,
+      "sha256": "48F106DF1C6CA097A581A3327E5CE8A2001F35DD78C1AEE21DC97102B3B7AF4D"
+    },
+    "verify_epsilon1_p2.py": {
+      "bytes": 3022,
+      "sha256": "D1DCD84E94C9FC5CDE5F4C7A1A393B1B38CDE8D2B1F109E3E44ED4DDE3686C5A"
+    }
+  },
+  "claim_boundary": "bounded exact certificate for epsilon_1(2,3) only; no Smith-profile multiplicity is an input",
+  "executions": {
+    "normal": {
+      "command": "python -I -B epsilon1_p2_certificate.py",
+      "result_sha256": "D97727F7706C35F4674B98CB9C9208F5FBCBFA33FED8A51133AD9F360202B037"
+    },
+    "optimized": {
+      "command": "python -I -B -O epsilon1_p2_certificate.py",
+      "result_sha256": "D97727F7706C35F4674B98CB9C9208F5FBCBFA33FED8A51133AD9F360202B037"
+    }
+  },
+  "python": "3.14.6",
+  "schema": "fcig.depth3.epsilon1-p2-receipt.v1",
+  "status": "PASS"
+}
