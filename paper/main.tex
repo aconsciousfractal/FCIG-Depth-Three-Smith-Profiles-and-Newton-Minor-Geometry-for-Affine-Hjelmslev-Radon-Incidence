@@ -35,7 +35,7 @@
 \setcounter{biburllcpenalty}{9000}
 \AtBeginBibliography{\small\raggedright
   \setlength{\emergencystretch}{3em}%
-  \setlength{\bibitemsep}{0.15\baselineskip}%
+  \setlength{\bibitemsep}{0pt}%
   \hbadness=10000}
 
 \newtheorem{theorem}{Theorem}[section]
@@ -2375,6 +2375,16 @@ python -O companion/epsilon1_p2/verify_epsilon1_p2.py
 \end{verbatim}
 Each verifier is read-only and authenticates its result and execution
 receipt.  No exceptional computation is extrapolated to another prime.
+
+\section*{AI-use disclosure and author responsibility}
+
+Under the author's direction, OpenAI Codex (GPT-5.6 Sol) generated the central
+mathematical development---including the all-prime depth-three Smith profile,
+Newton-minor analysis and divided-carry closure---and assisted with software,
+certificates and manuscript.  The author checked the work, set its public
+boundaries and takes responsibility for the final content.  Same-workflow
+machine reviews are not human peer review or independent expert verification.
+Detailed provenance is recorded in the repository's \path{AI_USE.md}.
 
 \printbibliography
 

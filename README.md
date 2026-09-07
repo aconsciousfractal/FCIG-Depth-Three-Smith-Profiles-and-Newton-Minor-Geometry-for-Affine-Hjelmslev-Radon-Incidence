@@ -7,7 +7,8 @@ Companion repository for the paper
 > Oleksiy Babanskyy, 2026.
 
 Paper: [PDF](paper/Depth-Three-Smith-Profiles-and-Newton-Minor-Geometry-for-Affine-Hjelmslev-Radon-Incidence.pdf) ·
-[LaTeX source](paper/main.tex) · [bibliography](paper/references.bib)
+[LaTeX source](paper/main.tex) · [bibliography](paper/references.bib) ·
+[AI-use disclosure](AI_USE.md)
 
 The paper studies the integer line-by-point incidence matrix of the affine
 plane over `Z/p^3 Z`, with primitive normal directions modulo units. It
@@ -142,6 +143,7 @@ and exact integrity layers.
 - Dependency notices: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - Accessibility status: [ACCESSIBILITY.md](ACCESSIBILITY.md).
 - Claim boundary: [docs/PUBLIC_CLAIM_BOUNDARY.md](docs/PUBLIC_CLAIM_BOUNDARY.md).
+- AI-use disclosure and author responsibility: [AI_USE.md](AI_USE.md).
 
 Copyright in the manuscript is retained by Oleksiy Babanskyy. The MIT licence
 applies to original companion software and supporting documentation, not to

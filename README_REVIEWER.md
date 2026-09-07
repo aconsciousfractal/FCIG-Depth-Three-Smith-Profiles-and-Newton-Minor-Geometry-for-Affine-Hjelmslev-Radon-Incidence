@@ -67,6 +67,8 @@ distinction between boundary columns and minimal generators, the exceptional
   separates imported inputs, adjacent literature and manuscript arguments.
 - [docs/REPRODUCIBILITY_BOUNDARY.md](docs/REPRODUCIBILITY_BOUNDARY.md)
   states exactly what software recomputes.
+- [AI_USE.md](AI_USE.md) records the model's mathematical role and the
+  author's responsibility for the final content.
 - [LICENSE_SCOPE.md](LICENSE_SCOPE.md) separates manuscript copyright from
   MIT software and documentation.
 

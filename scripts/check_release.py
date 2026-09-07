@@ -40,6 +40,7 @@ ALLOWED_PATHS = {
     ".gitattributes",
     ".gitignore",
     "ACCESSIBILITY.md",
+    "AI_USE.md",
     "CITATION.cff",
     "LICENSE",
     "LICENSE_SCOPE.md",
@@ -482,6 +483,22 @@ def _check_scientific_locks(root: Path = ROOT) -> None:
     for lock in public_template_locks:
         if lock not in manuscript:
             raise AssertionError(f"public manuscript template drift: {lock}")
+    ai_disclosure = native_path(root / "AI_USE.md").read_text(encoding="utf-8")
+    normalized_manuscript = " ".join(manuscript.split())
+    normalized_ai_disclosure = " ".join(ai_disclosure.split())
+    ai_disclosure_locks = (
+        "OpenAI Codex",
+        "GPT-5.6 Sol",
+        "generated the central mathematical development",
+        "takes responsibility for the final content",
+        "not human peer review or independent expert verification",
+    )
+    for lock in ai_disclosure_locks:
+        if (
+            lock not in normalized_manuscript
+            or lock not in normalized_ai_disclosure
+        ):
+            raise AssertionError(f"AI-use disclosure drift: {lock}")
     if "\\documentclass{amsart}" in manuscript or "\\stmtid" in manuscript:
         raise AssertionError("private or running-head manuscript template")
     if re.search(r"(?:FIG|TAB)-[0-9]+", manuscript):
@@ -818,6 +835,8 @@ def inspect_pdf(path: Path) -> dict[str, object]:
         "Keywords:",
         "MSC 2020:",
         "Companion repository and reproducibility materials",
+        "AI-use disclosure and author responsibility",
+        "GPT-5.6 Sol",
     ):
         if token not in full_text:
             raise AssertionError(f"visible PDF front matter missing: {token}")

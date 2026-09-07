@@ -41,3 +41,6 @@ all-prime interpolation.
 
 Readers should cite the paper for mathematical statements and describe the
 software as exact reproducibility and mutation-sensitive cross-checking.
+
+The mathematical-development provenance and author-responsibility boundary
+are stated in `AI_USE.md` and in the paper itself.

@@ -41,5 +41,15 @@ typed cross-chart divided carry and complete depth-three affine Smith profile
 are proved in the manuscript. The code checks their displayed consequences;
 it is not the proof.
 
+## AI-use provenance
+
+Under the author's direction, OpenAI Codex using GPT-5.6 Sol generated the
+central mathematical development, exact companion software, exceptional
+certificates and manuscript drafting described more fully in `AI_USE.md`.
+The author selected the research direction, checked the derivations and
+outputs, set the public boundaries and takes responsibility for the final
+content. Same-workflow machine reviews are not represented as human peer
+review or independent expert verification.
+
 Stable DOIs and public locators are recorded in the bibliography. Missing
 DOIs are not invented.
