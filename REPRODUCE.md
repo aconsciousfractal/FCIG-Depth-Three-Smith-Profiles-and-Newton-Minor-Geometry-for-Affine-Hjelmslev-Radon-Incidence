@@ -26,8 +26,9 @@ offline.
 
 The verifier binds its result to the current commit and tree.  It accepts an
 ordinary Git history, including corrective commits, merges, tags, remotes and
-detached CI checkouts.  The checkout itself must be clean and its tracked path
-census must agree with the declared release surface.
+detached CI checkouts.  Its `HEAD` tree must contain only regular declared
+blobs; the stage-zero index and raw working-tree bytes must match those blobs
+exactly, with no hidden `assume-unchanged` or `skip-worktree` flags.
 
 On PowerShell:
 
@@ -126,9 +127,9 @@ manifest authenticates the source manifest and title-named PDF.
 The release checker rejects undeclared paths, symlinks/reparse points,
 alternate streams, local workspace paths, private production codes, active
 PDF content, multiple EOF markers, non-A4 output, missing language or front
-matter, replacement refs, grafts, alternates and a dirty checkout.  It checks
-Git object connectivity without imposing a branching, tagging or remote
-policy.
+matter, replacement refs, grafts, alternates, hidden index flags and every
+`HEAD`--index--working-tree mismatch.  It checks Git object connectivity
+without imposing a branching, tagging or remote policy.
 
 ## Deterministic paper build
 

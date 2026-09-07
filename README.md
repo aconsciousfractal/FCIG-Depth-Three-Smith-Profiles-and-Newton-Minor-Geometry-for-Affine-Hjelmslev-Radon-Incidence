@@ -79,7 +79,8 @@ The standalone companion:
   `8` and `9`, without using a Smith-profile multiplicity as input;
 - rejects non-prime and incorrectly typed inputs;
 - verifies the declared repository surface, title-named PDF, source and
-  release manifests, and a clean checkout of the current Git `HEAD`.
+  release manifests, and exact `HEAD`--index--working-tree byte identity with
+  no hidden `assume-unchanged` or `skip-worktree` flags.
 
 The exceptional replay constructs the canonical incidence matrices and uses
 minimum-valuation local Smith elimination and Bockstein layer peeling. It is

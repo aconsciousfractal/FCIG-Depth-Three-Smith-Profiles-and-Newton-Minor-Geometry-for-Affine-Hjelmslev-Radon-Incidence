@@ -33,9 +33,9 @@ end with `PASS`. Verification is offline and writes no result file.
 The suite attacks non-prime inputs, branch selection, formula atoms,
 boundary/generator confusion, generated-TeX drift, undeclared paths, reparse
 points, active PDF content, private production residue, ambient Git
-redirection and replacement/graft/alternate-object rewriting.  It also checks
-that ordinary successors, merges, tags and remotes do not invalidate content
-verification.
+redirection, replacement/graft/alternate-object rewriting, hidden index flags
+and HEAD--index--working-tree byte drift.  It also checks that ordinary
+successors, merges, tags and remotes do not invalidate content verification.
 
 ## 3. Read the mathematical spine
 
